@@ -833,16 +833,13 @@ function cetakStruk() {
     })
     .then(() => {
         alert('Data berhasil disimpan ke Google Spreadsheet!');
-        // Cetak struk setelah data berhasil disimpan
-        printStruk(notaData);
-
-        // Hapus data dari localStorage
-        localStorage.removeItem('notaData');
-        // Reset tabel nota
-        loadNota();
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('Terjadi kesalahan saat menyimpan data!');
+    })
+    .finally(() => {
+        // Bagian ini akan selalu dijalankan, baik berhasil maupun gagal
         printStruk(notaData);
 
         // Hapus data dari localStorage
