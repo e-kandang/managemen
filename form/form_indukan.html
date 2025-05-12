@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Kandang || Form Indukan</title>
+    <link rel="icon" href="../assets/images/log2.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="../home.html"><img src="../assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item active">
+                            <a href="../home.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="sidebar-title">Menu Extra</li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Data Master</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="../hewan.html">Data Hewan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../jenis.html">Data Jenis</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../ras.html">Data Ras</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../indukan.html">Data Indukan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../anakan.html">Data anakan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-hexagon-fill"></i>
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="data-pem-ppdb.html">Transaksi Masuk</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="riwayat.html">Riwayat</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="laporan_jurusan.html">Laporan Pendapatan</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        <li class="sidebar-item">
+                            <a href="pengaturan.html" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0);" class="sidebar-link" onclick="logout()">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Form Jenis</h3>
+                            <p class="text-subtitle text-muted">Form Input Jenis</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="../hewan.html">Tabel Jenis</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Form Layout</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-alert d-none alert alert-success" role="alert">
+                    Form submitted successfully!
+                </div>
+
+                <!-- // Basic multiple Column Form section start -->
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Data Jenis Hewan</h4>
+                                </div>
+                               
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form" name="tambah" id="tambah">
+                                            <div class="row">
+                                                <div class="col-md-12 col-12">
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="hewan">Hewan</label>
+                                                                <select id="hewan" class="form-select" name="hewan" required>
+                                                                    <option value="" disabled selected>Pilih Jenis Hewan</option>
+                                                                    <!-- Opsi akan diisi secara dinamis -->
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="status">Status Indukan</label>
+                                                                <select id="status" class="form-select" name="status" required>
+                                                                    <option value="Aktive">Aktive</option>
+                                                                    <option value="Tidak Aktive">Tidak Aktive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="jml_anakan">Jumlah Anakan</label>
+                                                                <input type="number" id="jml_anakan" class="form-control" name="jml_anakan" required>
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="tanggal_indukan">Tanggal Menjadi Indukan</label>
+                                                                <input type="date" id="tanggal_indukan" class="form-control" name="tanggal_indukan" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="keterangan">Keterangan</label>
+                                                        <textarea id="keterangan" class="form-control" name="keterangan" rows="3"></textarea>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1 btn-kirim">Submit</button>
+                                                        <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                                                            <span role="status">Loading...</span>
+                                                          </button>
+                                                    <button type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Basic multiple Column Form section end -->
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; AGA</p>
+                    </div>
+                    <div class="float-end">
+                        <p>By <a
+                                href="">Aga Developer</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+
+
+
+<script>
+    // URL Web App dari Apps Script
+    const url = 'https://script.google.com/macros/s/AKfycbzSXe8yrX8fDcrgAFmKmg9PGliaIHf49KXGhZgGjKpaebRVZ402xctBZQeHNJr5y5Gm/exec'; // Ganti dengan URL Web App Anda
+
+    // Ambil data dari Apps Script dan tambahkan ke dropdown
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.getElementById('hewan');
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id_hewan; // ID dari spreadsheet
+                    option.textContent = item.kode; // Nama dari spreadsheet
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbytT-ULnfMqj48c53Z1z0ff9nnu-6t7fUslS6gDmpvg86tG6KiwbtHO2d_378c6F6_z/exec';
+        const form = document.forms['tambah'];
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+        const myAlert = document.querySelector('.my-alert');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btnLoading.classList.remove('d-none');
+            btnKirim.classList.add('d-none');
+
+            const formData = new FormData(form);
+            formData.append('func', 'add');  // Set function name to create entry
+            formData.append('SH', 'indukan'); // Specify the sheet name (change 'siswa' to your actual sheet name)
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => response.text()) // Change to text if your script returns plain text
+                .then(result => {
+                    console.log(result); // Log the result for debugging
+                    btnLoading.classList.add('d-none');
+                    btnKirim.classList.remove('d-none');
+                    myAlert.classList.remove('d-none');
+
+                    // Optionally, you can display the result message here
+                    myAlert.textContent = result; // Display the result message in the alert
+
+                    setTimeout(() => {
+                        myAlert.classList.add('d-none');
+                    }, 1200);
+
+                    form.reset();
+
+                    // Scroll to the top of the page
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth' // This adds a smooth scrolling effect
+                    });
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("Submission failed. Please try again.");
+                    btnLoading.classList.add('d-none');
+                    btnKirim.classList.remove('d-none');
+                });
+        });
+    });
+</script>
+
+
+</html>
