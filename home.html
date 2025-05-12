@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Management Kandang</title>
+    <link rel="icon" href="assets/images/log2.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <style>
+          #chart-visitors-profile {
+                    max-width: 300px; /* Batasi lebar maksimal */
+                    max-height: 300px; /* Batasi tinggi maksimal */
+                    margin: auto; /* Pusatkan */
+                  }
+                  
+    </style>
+ 
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="home.html"><img src="assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item active">
+                            <a href="home.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="sidebar-title">Menu Extra</li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Data Master</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="hewan.html">Data Hewan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="jenis.html">Data Jenis</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="ras.html">Data Ras</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="indukan.html">Data Indukan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="anakan.html">Data anakan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-hexagon-fill"></i>
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="data-pem-ppdb.html">Transaksi Masuk</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="riwayat.html">Riwayat</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="laporan_jurusan.html">Laporan Pendapatan</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        <li class="sidebar-item">
+                            <a href="pengaturan.html" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0);" class="sidebar-link" onclick="logout()">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Dashboard Management Kandang</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="row">
+                            <!-- Total Hewan -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="bi bi-box-seam"></i> <!-- Ikon untuk Total Hewan -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Total Hewan</h6>
+                                                <h6 class="font-extrabold mb-0 total-offline">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Domba -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="bi bi-box-seam"></i> <!-- Ikon untuk Total Hewan -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Total Domba</h6>
+                                                <h6 class="font-extrabold mb-0 total-laki">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Kambing -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="bi bi-tree"></i> <!-- Ikon untuk Total Kambing -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Total Kambing</h6>
+                                                <h6 class="font-extrabold mb-0 total-perempuan">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Penjualan Domba -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="bi bi-cash-stack"></i> <!-- Ikon untuk Penjualan Domba -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Penjualan Domba</h6>
+                                                <h6 class="font-extrabold mb-0 bayar-ofline">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Penjualan Kambing -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="bi bi-cart-check"></i> <!-- Ikon untuk Penjualan Kambing -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Penjualan Kambing</h6>
+                                                <h6 class="font-extrabold mb-0 total-online">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaksi Kambing -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <i class="bi bi-clipboard-data"></i> <!-- Ikon untuk Transaksi Kambing -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Transaksi Kambing</h6>
+                                                <h6 class="font-extrabold mb-0 laki_online">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaksi Domba -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="bi bi-clipboard-check"></i> <!-- Ikon untuk Transaksi Domba -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Transaksi Domba</h6>
+                                                <h6 class="font-extrabold mb-0 perempuan_online">Loading</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Transaksi All -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="bi bi-bar-chart-line"></i> <!-- Ikon untuk Transaksi All -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Transaksi All</h6>
+                                                <h6 class="font-extrabold mb-0 bayar-online">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Card: Jumlah Siswa Per Jurusan -->
+                            <div class="col-md-6 col-12">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h4>Jumlah Siswa Per Jurusan</h4>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center">
+                                        <canvas id="chart-jurusan" style="max-width: 100%; height: 300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Card: Chart Jenis Kelamin -->
+                            <div class="col-md-6 col-12">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <h4>Chart Jenis Kelamin</h4>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center">
+                                        <canvas id="chart-visitors-profile" style="max-width: 100%; height: 300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; AGA</p>
+                    </div>
+                    <div class="float-end">
+                        <p>By <a
+                                href="">Aga Developer</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+   
+    <script>
+    // Check if the user is logged in and managementapp data exists
+    if (!selectedRole.getItem('managementapp')) {
+        window.location.href = 'index.html'; // Redirect to login page
+    }
+
+    // Prevent user from going back to the previous page
+    window.history.replaceState(null, '', window.location.href);
+    window.onpopstate = function () {
+        window.history.go(1);
+    };
+
+    // Get the username from selectedRole
+    const managementData = JSON.parse(selectedRole.getItem('managementapp')) || {};
+    const username = managementData.username || 'test_user';
+
+    // Update the username in the header
+    const usernameHeader = document.getElementById('usernameHeader');
+    if (usernameHeader) {
+        usernameHeader.textContent = username;
+    }
+    </script>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            await fetchDataOffline();
+           
+        });
+    
+        // Fungsi Fetch Data Offline
+        async function fetchDataOffline() {
+            const scriptURL = "https://script.google.com/macros/s/AKfycbyKs9RpLLPPh3IChgFKa8phCBNuHl3XWHPlJXcoLcJL70hjprVW_LS4NX9wBS_B9hn8/exec";
+    
+            try {
+                let response = await fetch(scriptURL);
+                let data = await response.json();
+                console.log(data);
+                
+                if (data) {
+                    document.querySelector(".total-offline").textContent = (data.totaldomba || "0") + " hewan";
+                    document.querySelector(".total-laki").textContent = (data.totalkambing || "0") + " hewan";
+                    document.querySelector(".total-perempuan").textContent = (data.allhewan || "0") + " hewan";
+                    document.querySelector(".total-online").textContent = (data.totalpenjualdm || "0");
+                    document.querySelector(".laki_online").textContent = (data.totalpenjualkm || "0") ;
+                    document.querySelector(".perempuan_online").textContent = (data.transaksiall || "0") ;
+                    document.querySelector(".bayar-online").textContent = (data.transaksidm || "0") ;
+                    document.querySelector(".bayar-ofline").textContent = (data.transaksikm || "0");
+                } else {
+                    console.log("Data tidak ditemukan.");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+    
+        // Fungsi Fetch Data Online
+
+   
+    </script>
+    
+<script>
+    function logout() {
+        const username = localStorage.getItem('username'); // Get the username from local storage
+
+        // Check if username exists
+        if (username) {
+            const deleteUrl = `https://script.google.com/macros/s/AKfycbxAeeQSHUDj_k1pX-z3k9KG0d17QwWmIe0s7-Er7mljIWNah3umEcROWc7mRKtVQveJ/exec?username=${encodeURIComponent(username)}&action=delete`; // Replace with your actual Google Apps Script URL
+
+            fetch(deleteUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data deleted successfully:', data);
+                    // Clear the history from local storage
+                    localStorage.removeItem('history');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    localStorage.removeItem('role');
+
+                    // Redirect to index.html
+                    window.location.href = 'index.html'; // Change 'index.html' to your actual homepage if different
+                })
+                .catch(error => {
+                    console.error('Error deleting data:', error);
+                    // Optionally, clear local storage and redirect even if deletion fails
+                    localStorage.removeItem('history');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    localStorage.removeItem('role');
+                    window.location.href = 'index.html';
+                });
+        } else {
+            // If no username is found, just redirect
+            localStorage.removeItem('history');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    localStorage.removeItem('role');
+            window.location.href = 'index.html';
+        }
+    }
+</script>
+   
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
