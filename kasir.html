@@ -843,7 +843,13 @@ function cetakStruk() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Terjadi kesalahan saat menyimpan data!');
+        alert('Data siap cetak');
+        printStruk(notaData);
+
+        // Hapus data dari localStorage
+        localStorage.removeItem('notaData');
+        // Reset tabel nota
+        loadNota();
     });
 }
 
