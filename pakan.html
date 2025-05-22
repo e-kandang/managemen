@@ -259,7 +259,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="qty">Qty</label>
-                        <input type="number" id="qty" class="form-control" name="qty" required>
+                        <input type="number" id="qty" class="form-control" name="qty" required min="0" max="999999999" step="1">
                     </div>
                     <div class="form-group mb-3">
                         <label for="satuan">Satuan</label>
@@ -267,11 +267,12 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="harga_satuan">Harga Satuan</label>
-                        <input type="number" id="harga_satuan" class="form-control" name="harga_satuan" required>
+                        <input type="number" id="harga_satuan" class="form-control" name="harga_satuan" required min="0" max="999999999" step="0.01">
                     </div>
                     <div class="form-group mb-3">
                         <label for="total_biaya">Total Biaya</label>
                         <input type="number" id="total_biaya" class="form-control" name="total_biaya" readonly>
+                        <small id="total_biaya_display" class="text-muted">Rp 0</small>
                     </div>
                     <div class="form-group mb-3">
                         <label for="keterangan">Keterangan</label>
@@ -293,6 +294,33 @@
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
+    <script>
+        document.getElementById('qty').addEventListener('input', calculateTotal);
+        document.getElementById('harga_satuan').addEventListener('input', calculateTotal);
+    
+        function calculateTotal() {
+            const qty = parseFloat(document.getElementById('qty').value) || 0;
+            const hargaSatuan = parseFloat(document.getElementById('harga_satuan').value) || 0;
+
+            if (!qty || !hargaSatuan) {
+                document.getElementById('total_biaya').value = 0;
+                document.getElementById('total_biaya_display').textContent = 'Rp 0';
+                return;
+            }
+
+            const totalBiaya = qty * hargaSatuan;
+
+            // Simpan nilai asli (tanpa format) ke input
+            document.getElementById('total_biaya').value = totalBiaya;
+
+            // Tampilkan nilai yang diformat di elemen lain
+            document.getElementById('total_biaya_display').textContent = `Rp ${totalBiaya.toLocaleString('id-ID', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}`;
+        }
+    </script>
+    
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
@@ -582,19 +610,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Redirect to index.html
         window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
-    }
-</script>
-
-<script>
-    document.getElementById('qty').addEventListener('input', calculateTotal);
-    document.getElementById('harga_satuan').addEventListener('input', calculateTotal);
-
-    function calculateTotal() {
-        const qty = parseFloat(document.getElementById('qty').value) || 0;
-        const hargaSatuan = parseFloat(document.getElementById('harga_satuan').value) || 0;
-        const totalBiaya = qty * hargaSatuan;
-
-        document.getElementById('total_biaya').value = totalBiaya.toLocaleString('id-ID');
     }
 </script>
 
