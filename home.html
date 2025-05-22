@@ -114,7 +114,9 @@
                                 <li class="submenu-item">
                                     <a href="bon.html">Bon</a>
                                 </li>
-                                
+                                <li class="submenu-item">
+                                    <a href="pakan.html">Pakan</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="sidebar-item has-sub">
@@ -162,15 +164,15 @@
             <div class="page-content">
                 <section class="row">
                     <div class="col-12 col-lg-12">
-                        <div class="row">
+                        <div class="row g-3">
                             <!-- Total Hewan -->
                             <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-4 text-center">
                                                 <div class="stats-icon purple">
-                                                    <i class="bi bi-box-seam"></i> <!-- Ikon untuk Total Hewan -->
+                                                    <i class="bi bi-box-seam"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -184,12 +186,12 @@
 
                             <!-- Total Domba -->
                             <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-4 text-center">
                                                 <div class="stats-icon purple">
-                                                    <i class="bi bi-box-seam"></i> <!-- Ikon untuk Total Hewan -->
+                                                    <i class="bi bi-box-seam"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -203,12 +205,12 @@
 
                             <!-- Total Kambing -->
                             <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-4 text-center">
                                                 <div class="stats-icon green">
-                                                    <i class="bi bi-tree"></i> <!-- Ikon untuk Total Kambing -->
+                                                    <i class="bi bi-box-seam"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -222,12 +224,12 @@
 
                             <!-- Penjualan Domba -->
                             <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-4 text-center">
                                                 <div class="stats-icon red">
-                                                    <i class="bi bi-cash-stack"></i> <!-- Ikon untuk Penjualan Domba -->
+                                                    <i class="bi bi-cart-check"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -254,6 +256,44 @@
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">Penjualan Kambing</h6>
                                                 <h6 class="font-extrabold mb-0 jual-kambing">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Kambing (Kg) -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="bi bi-cart-check"></i><!-- Ikon untuk Kambing (Kg) -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Kambing (Kg)</h6>
+                                                <h6 class="font-extrabold mb-0 kambing-kg">Loading ...</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Domba (Kg) -->
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="bi bi-cart-check"></i><!-- Ikon untuk Domba (Kg) -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Domba (Kg)</h6>
+                                                <h6 class="font-extrabold mb-0 domba-kg">Loading ...</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -316,8 +356,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <!-- Pengeluaran -->
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
@@ -355,7 +393,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                         <div class="row">
     <!-- Card: Chart Penjualan -->
     <div class="col-md-6 col-lg-6 col-12">
@@ -369,6 +407,18 @@
         </div>
     </div>
 
+    <!-- Card: Grafik Per Kilogram -->
+    <div class="col-md-6 col-lg-6 col-12">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4>Grafik Per Kilogram</h4>
+            </div>
+            <div class="card-body d-flex justify-content-center">
+                <canvas id="chart-per-kg" style="max-width: 100%; height: 300px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Card: Nominal Transaksi -->
     <div class="col-md-6 col-lg-6 col-12">
         <div class="card">
@@ -380,7 +430,7 @@
             </div>
         </div>
     </div>
-</div>
+
                 </section>
             </div>
 
@@ -414,7 +464,7 @@
         });
     
         async function fetchDataAndDisplay() {
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwo6N3wYcIG3I61ARsGXyBldGyzWBiNL_X9ttPbhKlNhrYJRq8oeaxVx99vmVhXyAIh/exec";
+            const scriptURL = "https://script.google.com/macros/s/AKfycby1rscTI-SHCgFQpKYsBXwcEr_-Ozp-jCpSsWAiCz73sYYd7q1-2bvEcVsoLhWawlyB/exec";
     
             try {
                 
@@ -438,6 +488,7 @@
         }
     
         function renderCharts(data) {
+            // Grafik Penjualan
             const ctxPenjualan = document.getElementById("chart-penjualan").getContext("2d");
             new Chart(ctxPenjualan, {
                 type: "bar",
@@ -457,7 +508,8 @@
                     }
                 }
             });
-    
+
+            // Grafik Nominal Transaksi
             const ctxTransaksi = document.getElementById("chart-transaksi").getContext("2d");
             new Chart(ctxTransaksi, {
                 type: "pie",
@@ -477,38 +529,66 @@
                     }
                 }
             });
+
+            // Grafik Per Kilogram
+            const ctxPerKg = document.getElementById("chart-per-kg").getContext("2d");
+            new Chart(ctxPerKg, {
+                type: "bar",
+                data: {
+                    labels: ["Domba (Kg)", "Kambing (Kg)"],
+                    datasets: [{
+                        label: "Jumlah Per Kilogram",
+                        data: [data.kg_domba || 0, data.kg_kambing || 0],
+                        backgroundColor: ["#673AB7", "#FF5722"],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "top" },
+                        title: { display: true, text: "Jumlah Hewan Per Kilogram" }
+                    }
+                }
+            });
         }
     
         function updateDashboard(data) {
             const totalHewanElement = document.querySelector(".total-hewan");
             if (totalHewanElement) totalHewanElement.textContent = (data.allhewan || "0") + " hewan";
-    
+
             const totalDombaElement = document.querySelector(".total-domba");
             if (totalDombaElement) totalDombaElement.textContent = (data.totaldomba || "0") + " hewan";
-    
+
             const totalKambingElement = document.querySelector(".total-kambing");
             if (totalKambingElement) totalKambingElement.textContent = (data.totalkambing || "0") + " hewan";
-    
+
             const jualDombaElement = document.querySelector(".jual-domba");
             if (jualDombaElement) jualDombaElement.textContent = (data.totalpenjualdm || "0") + " hewan";
-    
+
             const jualKambingElement = document.querySelector(".jual-kambing");
             if (jualKambingElement) jualKambingElement.textContent = (data.totalpenjualkm || "0") + " hewan";
-    
+
             const transaksiKambingElement = document.querySelector(".transaksi-kambing");
             if (transaksiKambingElement) transaksiKambingElement.textContent = formatRupiah(data.transaksikm || "0");
-    
+
             const transaksiDombaElement = document.querySelector(".transaksi-domba");
             if (transaksiDombaElement) transaksiDombaElement.textContent = formatRupiah(data.transaksidm || "0");
-    
+
             const transaksiAllElement = document.querySelector(".transaksi-all");
             if (transaksiAllElement) transaksiAllElement.textContent = formatRupiah(data.transaksiall || "0");
-    
+
             const pengeluaranElement = document.querySelector(".pengeluaran");
             if (pengeluaranElement) pengeluaranElement.textContent = formatRupiah(data.pengeluaran || "0");
-    
+
             const danaBersihElement = document.querySelector(".dana-bersih");
             if (danaBersihElement) danaBersihElement.textContent = formatRupiah(data.dana_bersih || "0");
+
+            // Tambahkan data untuk Domba (Kg) dan Kambing (Kg)
+            const dombaKgElement = document.querySelector(".domba-kg");
+            if (dombaKgElement) dombaKgElement.textContent = (data.kg_domba || "0") + " kg";
+
+            const kambingKgElement = document.querySelector(".kambing-kg");
+            if (kambingKgElement) kambingKgElement.textContent = (data.kg_kambing || "0") + " kg";
         }
     
         function formatRupiah(angka) {
