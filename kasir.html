@@ -94,18 +94,15 @@
                         <h5 class="mb-0 text-white">Form Pembelian Hewan</h5>
                     </div>
                     <div class="card-body">
+                        <h2>Data Pembeli</h2>
+                        <hr>
+                        <br>
                         <form id="kasirForm">
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label">Tanggal</label>
                                 <input type="date" class="form-control" id="tanggal">
                             </div>
-                            <div class="form-group">
-                                <label for="kodeproduk">Kode Produk</label>
-                                <input id="kodeproduk" class="form-control" name="kodeproduk" list="kodeprodukList" placeholder="Ketik atau pilih kode produk" required>
-                                <datalist id="kodeprodukList">
-                                    <!-- Opsi akan diisi secara dinamis -->
-                                </datalist>
-                            </div>
+                            
                             <div class="mb-3">
                                 <label for="namaPembeli" class="form-label">Nama Pembeli</label>
                                 <input type="text" class="form-control" id="namaPembeli" placeholder="Masukkan nama pembeli">
@@ -113,6 +110,40 @@
                             <div class="mb-3">
                                 <label for="kontakPembeli" class="form-label">Kontak Pembeli</label>
                                 <input type="text" class="form-control" id="kontakPembeli" placeholder="Masukkan kontak pembeli">
+                            </div>
+                            <div class="mb-3">
+                                <label for="metodePembayaran" class="form-label">Metode Pembayaran</label>
+                                <select class="form-select" id="metodePembayaran">
+                                    <option value="Tunai">Tunai</option>
+                                    <option value="Transfer">Transfer</option>
+                                    <option value="Kredit">Kredit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="norekContainer" style="display: none;">
+                                <label for="norek" class="form-label">Nomor Rekening Penerima</label>
+                                <input type="text" class="form-control" id="norek" placeholder="Masukkan nomor rekening">
+                            </div>
+                            <div class="mb-3" id="atascontainer" style="display: none;">
+                                <label for="atasnama" class="form-label">Atas Nama</label>
+                                <input type="text" class="form-control" id="atasnama">
+                            </div>
+                            <div class="mb-3">
+                                <label for="namaPenjual" class="form-label">Nama Penjual</label>
+                                <input type="text" class="form-control" id="namaPenjual" placeholder="Masukkan nama penjual">
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-primary w-100" onclick="simpanTransaksi()">Simpan Data Pembeli</button>
+                            </div>
+                            <br>
+                            <h2>Data Hewan</h2>
+                            <hr>
+                            <br>
+                            <div class="form-group">
+                                <label for="kodeproduk">Kode Produk</label>
+                                <input id="kodeproduk" class="form-control" name="kodeproduk" list="kodeprodukList" placeholder="Ketik atau pilih kode produk" required>
+                                <datalist id="kodeprodukList">
+                                    <!-- Opsi akan diisi secara dinamis -->
+                                </datalist>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-12">Jenis Hewan</label>
@@ -146,32 +177,16 @@
                                 <label for="quantity" class="form-label">Quantity</label>
                                 <input type="number" class="form-control" id="quantity" placeholder="Masukkan jumlah">
                             </div>
-                            <div class="mb-3">
-                                <label for="metodePembayaran" class="form-label">Metode Pembayaran</label>
-                                <select class="form-select" id="metodePembayaran">
-                                    <option value="Tunai">Tunai</option>
-                                    <option value="Transfer">Transfer</option>
-                                    <option value="Kredit">Kredit</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" id="norekContainer" style="display: none;">
-                                <label for="norek" class="form-label">Nomor Rekening</label>
-                                <input type="text" class="form-control" id="norek" placeholder="Masukkan nomor rekening">
-                            </div>
-                            <div class="mb-3" id="atascontainer" style="display: none;">
-                                <label for="atasnama" class="form-label">Atas Nama</label>
-                                <input type="text" class="form-control" id="atasnama">
-                            </div>
-                            <div class="mb-3">
-                                <label for="namaPenjual" class="form-label">Nama Penjual</label>
-                                <input type="text" class="form-control" id="namaPenjual" placeholder="Masukkan nama penjual">
-                            </div>
+                            
                             <div class="mb-3 hide">
                                 <label for="idTransaksi" class="form-label">ID Transaksi</label>
                                 <input type="text" class="form-control" id="idTransaksi" readonly>
                             </div>
-                            <button type="button" class="btn btn-primary w-100" onclick="tambahNota()">Tambah ke Nota</button>
-
+                            <!-- <button type="button" class="btn btn-primary w-100" onclick="tambahNota()">Tambah ke Nota</button> -->
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-success w-100" onclick="tambahHewan()">Tambah Hewan</button>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -409,225 +424,266 @@ function loadData() {
         window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
     }
 </script>
-    <script>
-        let totalBayar = 0;
 
-        function generateTransactionId() {
-            const date = new Date();
-            const timestamp = date.getTime(); // Waktu dalam milidetik
-            const randomNum = Math.floor(Math.random() * 1000); // Angka acak 3 digit
-            return `TRX-${timestamp}-${randomNum}`;
-        }
+<script>
+let transaksiData = JSON.parse(localStorage.getItem('transaksiData')) || []; // Data transaksi
+let currentTransactionId = null; // ID transaksi aktif
 
-        function tambahNota() {
-            const tanggal = document.getElementById('tanggal').value;
-            const kodeProduk = document.getElementById('kodeproduk').value;
-            const namaPembeli = document.getElementById('namaPembeli').value;
-            const kontakPembeli = document.getElementById('kontakPembeli').value;
-            const jenisHewan = document.getElementById('jenis').value;
-            const rasHewan = document.getElementById('ras').value;
-            const satuan = document.getElementById('satuan').value;
-            const hargahewan = parseFloat(document.getElementById('hargahewan').value);
-            const quantity = parseFloat(document.getElementById('quantity').value);
-            const metodePembayaran = document.getElementById('metodePembayaran').value;
-            const namaPenjual = document.getElementById('namaPenjual').value;
+document.addEventListener('DOMContentLoaded', () => {
+    // Ambil currentTransactionId dari localStorage
+    currentTransactionId = localStorage.getItem('currentTransactionId');
 
-            // Ambil nilai norek dan atasnama hanya jika metode pembayaran adalah Transfer atau Debit
-            const norek = (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') 
-                ? document.getElementById('norek').value 
-                : null;
-            const atasnama = (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') 
-                ? document.getElementById('atasnama').value 
-                : null;
+    // Muat data nota jika currentTransactionId ada
+    if (currentTransactionId) {
+        loadNota();
+    }
+});
 
-            // Validasi input
-            if (!tanggal || !kodeProduk || !namaPembeli || !kontakPembeli || !jenisHewan || !rasHewan || !satuan || isNaN(hargahewan) || isNaN(quantity) || !metodePembayaran || !namaPenjual) {
-                alert('Harap isi semua data dengan benar!');
-                return;
-            }
+// Fungsi untuk menyimpan data pembeli
+function simpanTransaksi() {
+    const tanggal = document.getElementById('tanggal').value;
+    const namaPembeli = document.getElementById('namaPembeli').value;
+    const kontakPembeli = document.getElementById('kontakPembeli').value;
+    const metodePembayaran = document.getElementById('metodePembayaran').value;
+    const namaPenjual = document.getElementById('namaPenjual').value;
 
-            // Validasi tambahan untuk norek dan atasnama jika metode pembayaran adalah Transfer atau Debit
-            if ((metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') && (!norek || !atasnama)) {
-                alert('Harap isi Nomor Rekening dan Atas Nama untuk metode pembayaran Transfer atau Debit!');
-                return;
-            }
+    // Validasi input pembeli
+    if (!tanggal || !namaPembeli || !kontakPembeli || !metodePembayaran || !namaPenjual) {
+        alert('Harap isi semua data pembeli dengan benar!');
+        return;
+    }
 
-            // Hitung total
-            const total = hargahewan * quantity;
-
-            // Simpan data ke localStorage
-            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-            notaData.push({
-                idTransaksi: generateTransactionId(),
-                tanggal,
-                kodeProduk,
-                namaPembeli,
-                kontakPembeli,
-                jenisHewan,
-                rasHewan,
-                satuan,
-                hargahewan,
-                quantity,
-                total,
-                metodePembayaran,
-                norek,
-                atasnama,
-                namaPenjual
-            });
-            localStorage.setItem('notaData', JSON.stringify(notaData));
-
-            // Perbarui tampilan nota
-            loadNota();
-
-            // Reset form setelah data ditambahkan
-            document.getElementById('kasirForm').reset();
-            alert('Data berhasil ditambahkan ke Nota!');
-        }
-
-        function printNota() {
-            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-            if (notaData.length === 0) {
-                alert('Tidak ada data untuk dicetak!');
-                return;
-            }
-
-            let printContent = `
-                <div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">
-                    <h2 style="margin: 0;">Management Kandang</h2>
-                    <p style="margin: 0;">Jl. Contoh Alamat No. 123, Kota Contoh</p>
-                    <p style="margin: 0;">Telp: 0812-3456-7890</p>
-                    <hr style="border: 1px dashed #000;">
-                </div>
-                <div style="font-family: Arial, sans-serif; font-size: 14px;">
-                    <p><strong>Nama Pembeli:</strong> ${notaData[0].namaPembeli}</p>
-                    <p><strong>Tanggal:</strong> ${notaData[0].tanggal}</p>
-                    <p><strong>Metode Pembayaran:</strong> ${notaData[0].metodePembayaran}</p>
-                    <p><strong>Nama Penjual:</strong> ${notaData[0].namaPenjual}</p>
-                </div>
-                <hr style="border: 1px dashed #000;">
-                <table style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th style="text-align: left;">Kode</th>
-                            <th style="text-align: left;">Jenis</th>
-                            <th style="text-align: left;">Ras</th>
-                            <th style="text-align: right;">Qty</th>
-                            <th style="text-align: right;">Harga</th>
-                            <th style="text-align: right;">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            notaData.forEach(item => {
-                printContent += `
-                    <tr>
-                        <td>${item.kodeProduk}</td>
-                        <td>${item.jenisHewan}</td>
-                        <td>${item.rasHewan}</td>
-                        <td style="text-align: right;">${item.quantity}</td>
-                        <td style="text-align: right;">Rp ${item.harga.toLocaleString()}</td>
-                        <td style="text-align: right;">Rp ${item.total.toLocaleString()}</td>
-                    </tr>
-                `;
-            });
-
-            printContent += `
-                    </tbody>
-                </table>
-                <hr style="border: 1px dashed #000;">
-                <div style="text-align: right; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
-                    Total Bayar: Rp ${totalBayar.toLocaleString()}
-                </div>
-                <hr style="border: 1px dashed #000;">
-                <div style="text-align: center; font-family: Arial, sans-serif; font-size: 12px; margin-top: 20px;">
-                    <p>Terima kasih atas pembelian Anda!</p>
-                    <p>Barang yang sudah dibeli tidak dapat dikembalikan.</p>
-                </div>
-            `;
-
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                    <head>
-                        <title>Nota Pembelian</title>
-                        <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 20px;
-                            }
-                            table {
-                                width: 100%;
-                                border-collapse: collapse;
-                            }
-                            th, td {
-                                padding: 5px;
-                                text-align: left;
-                            }
-                            th {
-                                background-color: #f4f4f4;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${printContent}
-                    </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
-        }
-    </script>
-    <script>
-        document.getElementById('metodePembayaran').addEventListener('change', function () {
-            const metodePembayaran = this.value;
-            const norekContainer = document.getElementById('norekContainer');
-            const atascontainer = document.getElementById('atascontainer');
-
-            if (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') {
-                norekContainer.style.display = 'block';
-                atascontainer.style.display = 'block';
-            } else {
-                norekContainer.style.display = 'none';
-                atascontainer.style.display = 'none';
-            }
+    // Jika belum ada transaksi aktif, buat transaksi baru
+    if (!currentTransactionId) {
+        currentTransactionId = generateTransactionId();
+        transaksiData.push({
+            idTransaksi: currentTransactionId,
+            tanggal,
+            namaPembeli,
+            kontakPembeli,
+            metodePembayaran,
+            namaPenjual,
+            hewan: [] // Array untuk menyimpan data hewan
         });
-    </script>
-    <script>
-        function sinkronisasiData() {
-            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-            if (notaData.length === 0) {
-                alert('Tidak ada data untuk disinkronkan!');
-                return;
-            }
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyabLzAcZuAdM46D2aSdtr_mBry0OxPMiIbTyqu5XJDycSgWFF5nTvTSfuTsEtJPiK8/exec'; // Ganti dengan URL Web App dari Apps Script Anda
-
-            fetch(scriptURL, {
-                mode: 'no-cors',
-                method: 'POST',
-                body: JSON.stringify(notaData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.status === 'success') {
-                    alert('Data berhasil disinkronkan ke Google Spreadsheet!');
-                    // Hapus data dari localStorage setelah sinkronisasi berhasil
-                    localStorage.removeItem('notaData');
-                } else {
-                    alert('Data berhasil disinkronkan ke Google Spreadsheet!');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Data berhasil disinkronkan ke Google Spreadsheet!');
-            });
+        // Simpan currentTransactionId ke localStorage
+        localStorage.setItem('currentTransactionId', currentTransactionId);
+    } else {
+        // Jika transaksi sudah ada, perbarui data pembeli
+        const transaksi = transaksiData.find(t => t.idTransaksi === currentTransactionId);
+        if (transaksi) {
+            transaksi.tanggal = tanggal;
+            transaksi.namaPembeli = namaPembeli;
+            transaksi.kontakPembeli = kontakPembeli;
+            transaksi.metodePembayaran = metodePembayaran;
+            transaksi.namaPenjual = namaPenjual;
         }
-    </script>
-    <script>
+    }
+
+    // Simpan ke localStorage
+    localStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+    alert('Data pembeli berhasil disimpan!');
+    loadNota(); // Perbarui tampilan nota
+}
+
+// Fungsi untuk menambahkan data hewan
+function tambahHewan() {
+    const kodeProduk = document.getElementById('kodeproduk').value;
+    const jenisHewan = document.getElementById('jenis').value;
+    const rasHewan = document.getElementById('ras').value;
+    const satuan = document.getElementById('satuan').value;
+    const hargahewan = parseFloat(document.getElementById('hargahewan').value);
+    const quantity = parseFloat(document.getElementById('quantity').value);
+
+    // Validasi input hewan
+    if (!kodeProduk || !jenisHewan || !rasHewan || !satuan || isNaN(hargahewan) || isNaN(quantity)) {
+        alert('Harap isi semua data hewan dengan benar!');
+        return;
+    }
+
+    // Hitung total
+    const total = hargahewan * quantity;
+
+    // Tambahkan data hewan ke transaksi aktif
+    const transaksi = transaksiData.find(t => t.idTransaksi === currentTransactionId);
+    if (transaksi) {
+        transaksi.hewan.push({
+            kodeProduk,
+            jenisHewan,
+            rasHewan,
+            satuan,
+            hargahewan,
+            quantity,
+            total
+        });
+
+        // Simpan ke localStorage
+        localStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+        alert('Hewan berhasil ditambahkan!');
+        loadNota(); // Perbarui tampilan nota
+
+        // Reset input hewan
+        document.getElementById('kodeproduk').value = '';
+        document.getElementById('jenis').value = '';
+        document.getElementById('ras').value = '';
+        document.getElementById('satuan').value = '';
+        document.getElementById('hargahewan').value = '';
+        document.getElementById('quantity').value = '';
+    } else {
+        alert('Harap simpan data pembeli terlebih dahulu!');
+    }
+}
+
+// Fungsi untuk memuat data nota
+function loadNota() {
+    const notaTableBody = document.getElementById('notaTableBody');
+    notaTableBody.innerHTML = ''; // Kosongkan tabel sebelum memuat data
+
+    // Ambil data transaksi dari localStorage
+    const transaksi = transaksiData.find(t => t.idTransaksi === currentTransactionId);
+    if (transaksi) {
+        // Tampilkan data pembeli di nota
+        document.getElementById('notaNamaPembeli').textContent = transaksi.namaPembeli;
+        document.getElementById('notaTanggal').textContent = transaksi.tanggal;
+        document.getElementById('notaMetodePembayaran').textContent = transaksi.metodePembayaran;
+        document.getElementById('notaNamaPenjual').textContent = transaksi.namaPenjual;
+
+        // Tampilkan data hewan di tabel nota
+        transaksi.hewan.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${transaksi.idTransaksi}</td>
+                <td>${item.kodeProduk}</td>
+                <td>${item.jenisHewan}</td>
+                <td>${item.rasHewan}</td>
+                <td>${item.quantity}</td>
+                <td>${item.satuan}</td>
+                <td>Rp ${item.total.toLocaleString()}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="hapusHewan(${index})">Hapus</button>
+                </td>
+            `;
+            notaTableBody.appendChild(row);
+        });
+
+        // Hitung total bayar
+        const totalBayar = transaksi.hewan.reduce((sum, item) => sum + item.total, 0);
+        document.getElementById('totalBayar').textContent = `Rp ${totalBayar.toLocaleString()}`;
+    } else {
+        // Jika tidak ada transaksi aktif, kosongkan data nota
+        document.getElementById('notaNamaPembeli').textContent = '-';
+        document.getElementById('notaTanggal').textContent = '-';
+        document.getElementById('notaMetodePembayaran').textContent = '-';
+        document.getElementById('notaNamaPenjual').textContent = '-';
+        document.getElementById('totalBayar').textContent = 'Rp 0';
+    }
+}
+
+// Fungsi untuk menghapus hewan dari transaksi
+function hapusHewan(hewanIndex) {
+    const transaksi = transaksiData.find(t => t.idTransaksi === currentTransactionId);
+    if (transaksi) {
+        transaksi.hewan.splice(hewanIndex, 1); // Hapus hewan berdasarkan index
+
+        // Simpan perubahan ke localStorage
+        localStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+        alert('Hewan berhasil dihapus!');
+        loadNota(); // Perbarui tampilan nota
+    }
+}
+
+// Fungsi untuk membuat ID transaksi unik
+function generateTransactionId() {
+    const date = new Date();
+    const timestamp = date.getTime(); // Waktu dalam milidetik
+    const randomNum = Math.floor(Math.random() * 1000); // Angka acak 3 digit
+    return `TRX-${timestamp}-${randomNum}`;
+}
+
+// Fungsi untuk mereset transaksi
+function resetTransaksi() {
+    currentTransactionId = null;
+    localStorage.removeItem('currentTransactionId');
+    loadNota(); // Kosongkan tampilan nota
+}
+
+// Muat data nota saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    loadNota();
+});
+
+function hapusDataTransaksi() {
+    // Hapus transaksi aktif dari transaksiData
+    transaksiData = transaksiData.filter(t => t.idTransaksi !== currentTransactionId);
+
+    // Simpan perubahan ke localStorage
+    localStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+    // Hapus currentTransactionId dari localStorage
+    localStorage.removeItem('currentTransactionId');
+
+    // Reset currentTransactionId di memori
+    currentTransactionId = null;
+
+    // Kosongkan tampilan nota
+    loadNota();
+
+    alert('Data transaksi telah dihapus!');
+}
+</script>
+<script>
+document.getElementById('metodePembayaran').addEventListener('change', function () {
+    const metodePembayaran = this.value;
+    const norekContainer = document.getElementById('norekContainer');
+    const atascontainer = document.getElementById('atascontainer');
+
+    if (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') {
+        norekContainer.style.display = 'block';
+        atascontainer.style.display = 'block';
+    } else {
+        norekContainer.style.display = 'none';
+        atascontainer.style.display = 'none';
+    }
+});
+</script>
+<script>
+function sinkronisasiData() {
+    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+    if (notaData.length === 0) {
+        alert('Tidak ada data untuk disinkronkan!');
+        return;
+    }
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyabLzAcZuAdM46D2aSdtr_mBry0OxPMiIbTyqu5XJDycSgWFF5nTvTSfuTsEtJPiK8/exec'; // Ganti dengan URL Web App dari Apps Script Anda
+
+    fetch(scriptURL, {
+        mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify(notaData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.status === 'success') {
+            alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+            // Hapus data dari localStorage setelah sinkronisasi berhasil
+            localStorage.removeItem('notaData');
+        } else {
+            alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+    });
+}
+</script>
+<script>
 document.getElementById('satuan').addEventListener('change', function () {
     const satuan = this.value; // Ambil nilai satuan yang dipilih
     const hargahewanInput = document.getElementById('hargahewan');
@@ -648,103 +704,41 @@ document.getElementById('satuan').addEventListener('change', function () {
     }
 });
 </script>
-    <script>
-function loadNota() {
-    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-    const notaTableBody = document.getElementById('notaTableBody');
-    notaTableBody.innerHTML = ''; // Kosongkan tabel sebelum memuat data
-
-    if (notaData.length > 0) {
-        // Perbarui Informasi Nota
-        document.getElementById('notaNamaPembeli').textContent = notaData[0].namaPembeli;
-        document.getElementById('notaTanggal').textContent = notaData[0].tanggal;
-        document.getElementById('notaMetodePembayaran').textContent = notaData[0].metodePembayaran;
-        document.getElementById('notaNamaPenjual').textContent = notaData[0].namaPenjual;
-    } else {
-        // Reset Informasi Nota jika tidak ada data
-        document.getElementById('notaNamaPembeli').textContent = '-';
-        document.getElementById('notaTanggal').textContent = '-';
-        document.getElementById('notaMetodePembayaran').textContent = '-';
-        document.getElementById('notaNamaPenjual').textContent = '-';
-    }
-
-    notaData.forEach((item, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${item.idTransaksi}</td>
-            <td>${item.kodeProduk}</td>
-            <td>${item.jenisHewan}</td>
-            <td>${item.rasHewan}</td>
-            <td>${item.quantity}</td>
-            <td>${item.satuan}</td>
-            <td>Rp ${item.total.toLocaleString()}</td>
-            <td>
-                <button class="btn btn-danger btn-sm" onclick="hapusNota(${index})">Hapus</button>
-            </td>
-        `;
-        notaTableBody.appendChild(row);
-    });
-
-    // Perbarui total bayar
-    totalBayar = notaData.reduce((sum, item) => sum + item.total, 0);
-    document.getElementById('totalBayar').textContent = `Rp ${totalBayar.toLocaleString()}`;
-}
-</script>
-   
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        loadNota(); // Muat data nota dari localStorage
-    });
-</script>
-<script>
-function hapusNota(index) {
-    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-    if (index >= 0 && index < notaData.length) {
-        // Hapus data berdasarkan index
-        notaData.splice(index, 1);
-        localStorage.setItem('notaData', JSON.stringify(notaData)); // Perbarui localStorage
-        loadNota(); // Perbarui tampilan tabel
-    }
-}
-</script>
-
 <script>
 function cetakStruk() {
-    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
-    if (notaData.length === 0) {
+    const transaksi = transaksiData.find(t => t.idTransaksi === currentTransactionId);
+    if (!transaksi) {
         alert('Tidak ada data untuk dicetak!');
         return;
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxg9R8T0hmqpnY-Ts6QeDz4cQKUab-wVqOQ53898wSGG-YCuSr6lktgoBQtBb704bFN/exec'; // URL Web App
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwDEaTqQBNGnHYuIKwyqQZsp7GpYhO_sVQpLkYf0LafXqR_elNz_Wq2cD_V6kaLFUPB/exec'; // URL Web App
 
+    // Kirim data transaksi ke Google Spreadsheet
     fetch(scriptURL, {
-        mode: 'no-cors',
+        mode: 'no-cors', // Tetap menggunakan no-cors
         method: 'POST',
-        body: JSON.stringify(notaData),
+        body: JSON.stringify(transaksi),
         headers: {
             'Content-Type': 'application/json'
         }
     })
     .then(() => {
-        alert('Data berhasil disimpan ke Google Spreadsheet!');
+        // Karena mode no-cors, kita tidak bisa membaca respons dari server
+        alert('Data telah dikirim ke Google Spreadsheet!');
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Terjadi kesalahan saat menyimpan data!');
+        alert('Terjadi kesalahan saat mengirim data!');
     })
     .finally(() => {
-        printStruk(notaData); // Cetak nota
-
-        localStorage.removeItem('notaData'); // Hapus data lokal
-        loadNota(); // Reset tabel
+        printStruk(transaksi); // Cetak struk setelah pengiriman data
+        hapusDataTransaksi(); // Hapus data transaksi dari localStorage
     });
 }
 
-
-// Fungsi untuk mencetak struk
-function printStruk(notaData) {
-    let totalBayar = notaData.reduce((sum, item) => sum + item.total, 0);
+function printStruk(transaksi) {
+    const totalBayar = transaksi.hewan.reduce((sum, item) => sum + item.total, 0);
 
     let printContent = `
         <div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">
@@ -754,19 +748,20 @@ function printStruk(notaData) {
             <hr style="border: 1px dashed #000;">
         </div>
         <div style="font-family: Arial, sans-serif; font-size: 14px;">
-            <p><strong>Nama Pembeli:</strong> ${notaData[0].namaPembeli}</p>
-            <p><strong>Tanggal:</strong> ${notaData[0].tanggal}</p>
-            <p><strong>Metode Pembayaran:</strong> ${notaData[0].metodePembayaran}</p>
-            <p><strong>Nama Penjual:</strong> ${notaData[0].namaPenjual}</p>
+            <p><strong>ID Transaksi:</strong> ${transaksi.idTransaksi}</p>
+            <p><strong>Nama Pembeli:</strong> ${transaksi.namaPembeli}</p>
+            <p><strong>Tanggal:</strong> ${transaksi.tanggal}</p>
+            <p><strong>Metode Pembayaran:</strong> ${transaksi.metodePembayaran}</p>
+            <p><strong>Nama Penjual:</strong> ${transaksi.namaPenjual}</p>
         </div>
         <hr style="border: 1px dashed #000;">
         <table style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-collapse: collapse;">
             <thead>
                 <tr>
-                    <th style="text-align: left;">Kode</th>
-                    <th style="text-align: left;">Jenis</th>
-                    <th style="text-align: left;">Ras</th>
-                    <th style="text-align: right;">Qty</th>
+                    <th style="text-align: left;">Kode Produk</th>
+                    <th style="text-align: left;">Jenis Hewan</th>
+                    <th style="text-align: left;">Ras/Sub Hewan</th>
+                    <th style="text-align: right;">Quantity</th>
                     <th style="text-align: right;">Harga</th>
                     <th style="text-align: right;">Total</th>
                 </tr>
@@ -774,7 +769,7 @@ function printStruk(notaData) {
             <tbody>
     `;
 
-    notaData.forEach(item => {
+    transaksi.hewan.forEach(item => {
         printContent += `
             <tr>
                 <td>${item.kodeProduk}</td>
@@ -784,7 +779,7 @@ function printStruk(notaData) {
                 <td style="text-align: right;">Rp ${item.hargahewan.toLocaleString()}</td>
                 <td style="text-align: right;">Rp ${item.total.toLocaleString()}</td>
             </tr>
-    `;
+        `;
     });
 
     printContent += `
@@ -831,6 +826,25 @@ function printStruk(notaData) {
     `);
     printWindow.document.close();
     printWindow.print();
+}
+
+function hapusDataTransaksi() {
+    // Hapus transaksi aktif dari transaksiData
+    transaksiData = transaksiData.filter(t => t.idTransaksi !== currentTransactionId);
+
+    // Simpan perubahan ke localStorage
+    localStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+    // Hapus currentTransactionId dari localStorage
+    localStorage.removeItem('currentTransactionId');
+
+    // Reset currentTransactionId di memori
+    currentTransactionId = null;
+
+    // Kosongkan tampilan nota
+    loadNota();
+
+    alert('Data transaksi telah dihapus!');
 }
 </script>
 <script>
