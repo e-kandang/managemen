@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Kandang || Form Jenis</title>
+    <link rel="icon" href="../assets/images/log2.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="../home.html"><img src="../assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="../home.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="../pencarian.html" class='sidebar-link'>
+                                <i class="bi bi-search"></i>
+                                <span>Pencarian Hewan</span>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="sidebar-title">Menu Extra</li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Data Master</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="../karyawan.html">Data Karyawan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../hewan.html">Data Hewan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../jenis.html">Data Jenis</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../ras.html">Data Ras</a>
+                                </li>
+                                <li class="submenu-item active">
+                                    <a href="../indukan.html">Data Indukan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../pejantan.html">Data Pejantan</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-cash"></i>
+
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="../Trnsaksi_masuk.html">Transaksi Masuk</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-receipt-cutoff"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="../pengeluaran_umum.html">Pengeluaran Umum</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../invoice.html">Invoice</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="../bon.html">Bon</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="../laporanall.html">Laporan All</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        <!-- <li class="sidebar-item">
+                            <a href="../pengaturan.html" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0);" class="sidebar-link" onclick="logout()">
+                                <i class="bi bi-box-arrow-right"></i>
+
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Form Invoice</h3>
+                            <p class="text-subtitle text-muted">Form Invoice</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="../invoice.html">Tabel Invoice</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Form Layout</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-alert d-none alert alert-success" role="alert">
+                    Form submitted successfully!
+                </div>
+
+                <!-- // Basic multiple Column Form section start -->
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Data Invoice</h4>
+                                </div>
+                               
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form" name="tambah" id="tambah">
+                                            <div class="row">
+                                               
+
+                                                <!-- Tanggal -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="tanggal">Tanggal</label>
+                                                        <input type="date" id="tanggal" class="form-control" name="tanggal" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Periode -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="periode">Periode</label>
+                                                        <input type="text" id="periode" class="form-control" name="periode" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Nama Karyawan -->
+                                                 <div class="form-group">
+                                                    <label for="nama_karyawan">nama_karyawan</label>
+                                                    <select id="nama_karyawan" class="form-select" name="nama_karyawan" required>
+                                                        <option value="0" disabled selected>Pilih nama karyawan</option>
+                                                        <!-- Opsi akan diisi secara dinamis -->
+                                                    </select>
+                                                </div>
+
+                                                <!-- Divisi -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="divisi">divisi</label>
+                                                        <select id="divisi" class="form-select" name="divisi" required>
+                                                            <option value="" disabled selected>Pilih divisi</option>
+                                                            <option value="Manager">Manager</option>
+                                                            <option value="Staff">Staff</option>
+                                                            <option value="Supervisor">Supervisor</option>
+                                                            <option value="Admin">Admin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jumlah Hari -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="jumlah_hari">Jumlah Hari</label>
+                                                        <input type="number" id="jumlah_hari" class="form-control" name="jumlah_hari" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Invoice Perhari -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="invoice_perhari">Invoice Perhari</label>
+                                                        <input type="number" id="invoice_perhari" class="form-control" name="invoice_perhari" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jumlah Invoice (Readonly) -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="jumlah_invoice">Jumlah Invoice</label>
+                                                        <input type="number" id="jumlah_invoice" class="form-control" name="jumlah_invoice" readonly>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jam Lembur -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="jam_lembur">Jam Lembur</label>
+                                                        <input type="number" id="jam_lembur" class="form-control" name="jam_lembur" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jumlah Lembur -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="jumlah_lembur">Jumlah Lembur</label>
+                                                        <input type="number" id="jumlah_lembur" class="form-control" name="jumlah_lembur" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jumlah Bon -->
+                                                <div class="form-group">
+                                                    <label for="jumlah_bon">jumlah_bon</label>
+                                                    <select id="jumlah_bon" class="form-select" name="jumlah_bon">
+                                                        <option value="0" disabled selected>Pilih Jenis jumlah_bon</option>
+                                                        <!-- Opsi akan diisi secara dinamis -->
+                                                    </select>
+                                                </div>
+
+                                                <!-- Potongan Bon -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="potongan_bon">Jumlah Bon</label>
+                                                        <input type="number" id="potongan_bon" class="form-control" name="potongan_bon">
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <!-- Sisa Bon (Readonly) -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="sisa_bon">Sisa Bon</label>
+                                                        <input type="number" id="sisa_bon" class="form-control" name="sisa_bon" readonly>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Jenis Invoice -->
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="jenis_invoice">jenis invoice</label>
+                                                        <select id="jenis_invoice" class="form-select" name="jenis_invoice" required>
+                                                            <option value="" disabled selected>Pilih jenis invoice</option>
+                                                            <option value="Cash">Cash</option>
+                                                            <option value="Transfer">Transfer</option>
+                                                          
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Total Gaji (Readonly) -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="total_gaji">Total Gaji</label>
+                                                        <input type="number" id="total_gaji" class="form-control" name="total_gaji" readonly>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Submit and Reset Buttons -->
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1 btn-kirim">Submit</button>
+                                                    <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                                                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                                                        <span role="status">Loading...</span>
+                                                    </button>
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Basic multiple Column Form section end -->
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; AGA</p>
+                    </div>
+                    <div class="float-end">
+                        <p>By <a
+                                href="">Aga Developer</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+
+<script>
+    // URL Web App dari Apps Script
+    const url = 'https://script.google.com/macros/s/AKfycbzr8wSYUmzsw9RJrADIVAV6Hv-XPhzismVYHyRL5ZZ2UOPCuUhnVr_7LkbohCrS0jTQ/exec'; // Ganti dengan URL Web App Anda
+
+    // Ambil data dari Apps Script dan tambahkan ke dropdown
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.getElementById('jumlah_bon');
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.bon; // ID dari spreadsheet
+                    option.textContent = item.nama_karyawan; // Nama dari spreadsheet
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
+<script>
+    // URL Web App dari Apps Script
+    const url2 = 'https://script.google.com/macros/s/AKfycby3zbUhxNKLzBFDoHFFNi0TtNj4_eRjBm7dknKESSfrCrZz-ZymBa87PlWk_8YpjZ6M/exec'; // Ganti dengan URL Web App Anda
+
+    // Ambil data dari Apps Script dan tambahkan ke dropdown
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.getElementById('nama_karyawan');
+
+        fetch(url2)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id_karyawan; // ID dari spreadsheet
+                    option.textContent = item.nama_karyawan; // Nama dari spreadsheet
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const jumlahHariInput = document.getElementById('jumlah_hari');
+        const invoicePerhariInput = document.getElementById('invoice_perhari');
+        const jumlahInvoiceInput = document.getElementById('jumlah_invoice');
+        const jumlahBonInput = document.getElementById('jumlah_bon');
+        const potonganBonInput = document.getElementById('potongan_bon');
+        const sisaBonInput = document.getElementById('sisa_bon');
+        const jumlahLemburInput = document.getElementById('jumlah_lembur');
+        const totalGajiInput = document.getElementById('total_gaji');
+
+        // Hitung Jumlah Invoice
+        jumlahHariInput.addEventListener('input', calculateInvoice);
+        invoicePerhariInput.addEventListener('input', calculateInvoice);
+
+        function calculateInvoice() {
+            const jumlahHari = parseFloat(jumlahHariInput.value) || 0;
+            const invoicePerhari = parseFloat(invoicePerhariInput.value) || 0;
+            jumlahInvoiceInput.value = jumlahHari * invoicePerhari;
+            calculateTotalGaji();
+        }
+
+        // Hitung Sisa Bon
+        jumlahBonInput.addEventListener('input', calculateSisaBon);
+        potonganBonInput.addEventListener('input', calculateSisaBon);
+
+        function calculateSisaBon() {
+            const jumlahBon = parseFloat(jumlahBonInput.value) || 0;
+            const potonganBon = parseFloat(potonganBonInput.value) || 0;
+
+            if (potonganBon > jumlahBon) {
+                alert('Potongan bon melebihi jumlah bon!');
+                potonganBonInput.value = jumlahBon;
+            }
+
+            sisaBonInput.value = jumlahBon - potonganBon;
+            calculateTotalGaji();
+        }
+
+        // Hitung Total Gaji
+        jumlahLemburInput.addEventListener('input', calculateTotalGaji);
+
+        function calculateTotalGaji() {
+            const jumlahInvoice = parseFloat(jumlahInvoiceInput.value) || 0;
+            const jumlahLembur = parseFloat(jumlahLemburInput.value) || 0;
+            const potonganBon = parseFloat(potonganBonInput.value) || 0;
+
+            totalGajiInput.value = jumlahInvoice + jumlahLembur - potonganBon;
+        }
+    });
+    document.getElementById('tambah').addEventListener('submit', function (event) {
+        event.preventDefault();
+    
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+    
+        btnKirim.classList.add('d-none');
+        btnLoading.classList.remove('d-none');
+    
+        const tambahUrl = 'https://script.google.com/macros/s/AKfycbzs-rx3TVdDnldRc4bHmS1IYjGYnxLM7ekkx6ITm5jlpE1E_Le_WopKgII-k1swzbDq/exec'; // Ganti dengan URL Google Apps Script untuk tambah data
+        const updateUrl = 'https://script.google.com/macros/s/AKfycbwzSfG2oU3FbEQTa6TuYg0sviIoUom-oT_NW-q0ZnPNpF-e1vDAl__JBgvhjpc--Tvy/exec'; // Ganti dengan URL Google Apps Script untuk update data
+    
+        // Ambil nilai input dari form untuk tambah data
+        const form = document.forms['tambah'];
+        const formData = new FormData(form);
+        formData.append('func', 'add'); // Fungsi untuk tambah data
+        formData.append('SH', 'invoice'); // Nama sheet untuk tambah data
+    
+        // Kirim data untuk tambah data
+        fetch(tambahUrl, { method: 'POST', body: formData })
+            .then(response => response.text()) // Ubah ke text jika Apps Script mengembalikan plain text
+            .then(result => {
+                console.log('Tambah Data Result:', result); // Log hasil tambah data untuk debugging
+    
+                // Setelah tambah data berhasil, lanjutkan ke update data
+                const id_karyawan = document.getElementById('nama_karyawan').value; // Ambil ID karyawan dari dropdown
+                const sisa_bon = parseFloat(document.getElementById('sisa_bon').value) || 0;
+    
+                const updateParams = {
+                    func: 'UPDATE',
+                    data: {
+                        id_karyawan,
+                        sisa_bon
+                    },
+                    SH: 'bon' // Nama sheet untuk update data
+                };
+    
+                return fetch(updateUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Ubah ke 'cors' untuk mendukung respons JSON
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updateParams)
+                });
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Gagal mengupdate data.');
+                }
+                return response.json(); // Pastikan respons JSON valid
+            })
+            .then(updateResult => {
+                console.log('Update Data Result:', updateResult); // Log hasil update data untuk debugging
+                if (updateResult.status === 'success') {
+                    alert('Data berhasil ditambahkan dan sisa_bon berhasil diupdate.');
+                    location.reload();
+                } else {
+                    alert('Gagal mengupdate data: ' + updateResult.message);
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('Data Berhasil Ditambahkan');
+                location.reload();
+            })
+            .finally(() => {
+                btnLoading.classList.add('d-none');
+                btnKirim.classList.remove('d-none');
+            });
+    });
+</script>
+<script>
+    function logout() {
+        // Clear the history from local storage
+        localStorage.removeItem('selectedRole');
+
+        // Redirect to index.html
+        window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
+    }
+</script>
+
+</html>
