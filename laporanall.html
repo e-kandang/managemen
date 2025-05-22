@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Kandang || Rekap All</title>
+    <link rel="icon" href="assets/images/log2.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .modal-dialog {
+            max-width: 50%; /* Sesuaikan lebar modal */
+        }
+        .btn-secondary {
+            white-space: normal; /* Izinkan teks untuk membungkus ke baris berikutnya */
+            word-wrap: break-word; /* Pecah kata jika terlalu panjang */
+            text-align: center; /* Pusatkan teks di dalam tombol */
+            max-width: 300px; /* Batasi lebar tombol */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="../home.html"><img src="assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="home.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="pencarian.html" class='sidebar-link'>
+                                <i class="bi bi-search"></i>
+                                <span>Pencarian Hewan</span>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="sidebar-title">Menu Extra</li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Data Master</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="karyawan.html">Data Karyawan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="hewan.html">Data Hewan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="jenis.html">Data Jenis</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="ras.html">Data Ras</a>
+                                </li>
+                                <li class="submenu-item active">
+                                    <a href="indukan.html">Data Indukan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="pejantan.html">Data Pejantan</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-cash"></i>
+
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="Trnsaksi_masuk.html">Transaksi Masuk</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-receipt-cutoff"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="pengeluaran_umum.html">Pengeluaran Umum</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="invoice.html">Invoice</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="bon.html">Bon</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="laporanall.html">Laporan All</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        <!-- <li class="sidebar-item">
+                            <a href="pengaturan.html" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0);" class="sidebar-link" onclick="logout()">
+                                <i class="bi bi-box-arrow-right"></i>
+
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Rekap Pengeluaan dan Pemasukan</h3>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="home.html">Tabel Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Cetak</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+               
+                <section class="section">
+                    <div class="page-wrapper">
+                        <!-- ============================================================== -->
+                        <!-- Bread crumb and right sidebar toggle -->
+                        <!-- ============================================================== -->
+                        <div class="page-breadcrumb">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                     
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- End Bread crumb and right sidebar toggle -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Container fluid  -->
+                        <!-- ============================================================== -->
+                        <div class="container-fluid">
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content -->
+                            <!-- ============================================================== -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                         
+                                        <form class="row value-forms" name="rep">
+                                            <div class="col-md-8 text-center">
+                                                <label for="tanggal" class="visually-hidden">Masukan Tanggal</label>
+                                                <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                                            </div>
+                                            <div class="col-md-4 p-2 text-center">
+                                                <button type="submit" class="btn btn-primary btn-kirim">Cetak Invoice</button>
+                                                <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                                                  <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                                                  <span role="status">Loading...</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                                          
+                                        
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                     
+                            <div class="page-content">
+                            <section class="row row-cols-1 row-cols-md-3 g-4">
+                                <!-- Total Pengeluaran -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon purple">
+                                                        <i class="bi bi-cash-stack"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Total Pengeluaran</h6>
+                                                    <h6 class="font-extrabold mb-0 total-pengeluaran">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Penjualan KM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon blue">
+                                                        <i class="bi bi-cart-check"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Total Penjualan KM</h6>
+                                                    <h6 class="font-extrabold mb-0 total-penjualan-km">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Penjualan DM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon green">
+                                                        <i class="bi bi-cart-check"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Total Penjualan DM</h6>
+                                                    <h6 class="font-extrabold mb-0 total-penjualan-dm">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Transaksi KM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon orange">
+                                                        <i class="bi bi-receipt"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Transaksi KM</h6>
+                                                    <h6 class="font-extrabold mb-0 transaksi-km">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Transaksi DM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon red">
+                                                        <i class="bi bi-receipt"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Transaksi DM</h6>
+                                                    <h6 class="font-extrabold mb-0 transaksi-dm">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Transaksi All -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon teal">
+                                                        <i class="bi bi-receipt"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Transaksi All</h6>
+                                                    <h6 class="font-extrabold mb-0 transaksi-all">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </section>
+                        </div>
+                    </div> <!-- Dana Bersih -->
+                                             <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-body px-3 py-4-5">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <h6 class="text-muted font-semibold">Dana Bersih</h6>
+                                                                <h6 class="font-extrabold mb-0 dana_bersih">Loading...</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container mt-4">
+                                                <button class="btn btn-primary mb-3" onclick="exportToPDFSummaryFull()">Export Ringkasan Lengkap PDF</button>
+
+                                                <div class="card ">
+                                                    <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered" id="summary-table">
+                                                        <thead class="table">
+                                                            <tr>
+                                                                <th>Total Pengeluaran</th>
+                                                                <th>Total Penjualan Kambing</th>
+                                                                <th>Total Penjualan Domba</th>
+                                                                <th>Transaksi Kambing</th>
+                                                                <th>Transaksi Domba</th>
+                                                                <th>Transaksi All</th>
+                                                                <th>Dana Bersih</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="td-pengeluaran">Loading...</td>
+                                                                <td class="td-penjualan-km">Loading...</td>
+                                                                <td class="td-penjualan-dm">Loading...</td>
+                                                                <td class="td-transaksi-km">Loading...</td>
+                                                                <td class="td-transaksi-dm">Loading...</td>
+                                                                <td class="td-transaksi-all">Loading...</td>
+                                                                <td class="td-dana-bersih">Loading...</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex justify-end m-3">
+                                                <button class="btn btn-danger" onclick="exportToPDF()">Export Pengeluaran Umum to PDF</button>
+                                            </div>
+                                            <section class="section">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <div class="d-flex justify-content-between mb-3">
+                                                            <a class="mb-0">Data Casis</a>
+                                                             <input type="text" id="search-input" placeholder="Cari data..." class="form-control w-25" onkeyup="searchTable()"> 
+                                                        </div> -->
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID Pengeluaran</th>
+                                                                        <th>Tanggal</th>
+                                                                        <th>Kategori</th>
+                                                                        <th>Deskripsi</th>
+                                                                        <th>Jumlah</th>
+                                                                        <th>Metode Pembayaran</th>
+                                                                        <th>Keterangan</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="table-body">
+                                                                    <!-- Data akan dimasukkan di sini -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>   
+                                            <div class="flex justify-end m-3">
+                                                
+                                                <button class="btn btn-danger" onclick="exportToPDF2()">Export Rekap Invoice to PDF</button>
+                                            </div>
+                                            <section class="section">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table2">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID Invoice</th>
+                                                                        <th>Tanggal</th>
+                                                                        <th>Periode</th>
+                                                                        <th>Nama Karyawan</th>
+                                                                        <th>Divisi</th>
+                                                                        <th>Jumlah Hari</th>
+                                                                        <th>Invoice Perhari</th>
+                                                                        <th>Jumlah Invoice</th>
+                                                                        <th>Jam Lembur</th>
+                                                                        <th>Jumlah Lembur</th>
+                                                                        <th>Jumlah Bon</th>
+                                                                        <th>Potongan Bon</th>
+                                                                        <th>Sisa Bon</th>
+                                                                        <th>Jenis Invoice</th>
+                                                                        <th>Total Gaji</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="table-body2">
+                                                                    <!-- Data akan dimasukkan di sini -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <div class="flex justify-end m-3">
+                                                
+                                                <button class="btn btn-danger" onclick="exportToPDF3()">Export Pembelian Pakan to PDF</button>
+                                            </div>
+                                            <section class="section">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <div class="d-flex justify-content-between mb-3">
+                                                            <a class="mb-0">Data Casis</a>
+                                                             <input type="text" id="search-input" placeholder="Cari data..." class="form-control w-25" onkeyup="searchTable()"> 
+                                                        </div> -->
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table3">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID Pakan</th>
+                                                                        <th>Tanggal</th>
+                                                                        <th>Jenis Pakan</th>
+                                                                        <th>Qty</th>
+                                                                        <th>Satuan</th>
+                                                                        <th>Harga Satuan</th>
+                                                                        <th>Total Biaya</th>
+                                                                        <th>Keterangan</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="table-body3">
+                                                                    <!-- Data akan dimasukkan di sini -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <div class="flex justify-end m-3">
+                                                
+                                                <button class="btn btn-danger" onclick="exportToPDF4()">Export Pemasukan dari penjualan to PDF</button>
+                                            </div>
+                                                    <section class="section">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                
+                                                                <!-- <div class="d-flex justify-content-between mb-3">
+                                                                    <a class="mb-0">Data Casis</a>
+                                                                     <input type="text" id="search-input" placeholder="Cari data..." class="form-control w-25" onkeyup="searchTable()"> 
+                                                                </div> -->
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped" id="table4">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>ID Transaksi</th>
+                                                                                <th>Tanggal</th>
+                                                                                <th>Kode Produk</th>
+                                                                                <th>Nama Pembeli</th>
+                                                                                <th>Kontak Pembeli</th>
+                                                                                <th>Jenis Hewan</th>
+                                                                                <th>Ras Hewan</th>
+                                                                                <th>Satuan</th>
+                                                                                <th>Quantity</th>
+                                                                                <th>Harga Hewan</th>
+                                                                                <th>Metode Pembayaran</th>
+                                                                                <th>Nama Penjual</th>
+                                                                                <th>No. Rekening</th>
+                                                                                <th>Atas Nama</th>
+                                                                                <th>Total</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="table-body4">
+                                                                            <!-- Data akan dimasukkan di sini -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                            <!-- ============================================================== -->
+                            <!-- End PAge Content -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- Right sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- .right-sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- End Right sidebar -->
+                            <!-- ============================================================== -->
+                        </div>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; AGA</p>
+                    </div>
+                    <div class="float-end">
+                        <p>By <a
+                                href="">Aga Developer</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+   
+    <script src="assets/js/main.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzkl_so2pL7aeuGFrhOvwomQjYE6IjCZ8qmtIRNc9ShTgFSdEMX34WPgVw-WUVGxwRx/exec'; // Ganti dengan URL Google Apps Script Anda
+        const form = document.forms['rep'];
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+        const myAlert = document.querySelector('.my-alert');
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          btnLoading.classList.remove('d-none');
+          btnKirim.classList.add('d-none');
+      
+          const formData = new FormData(form);
+          formData.append('func', 'add'); // Menentukan fungsi yang akan dijalankan di Google Apps Script
+          formData.append('SH', 'set'); // Nama sheet tujuan
+      
+          fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => response.text()) // Mengambil respons sebagai teks
+            .then(result => {
+                location.reload();
+              btnLoading.classList.add('d-none');
+              btnKirim.classList.remove('d-none');
+              myAlert.classList.remove('d-none');
+              form.reset(); // Reset form setelah sukses
+            })
+            .catch(error => {
+               // Log error jika terjadi kesalahan
+        
+            });
+        });
+      </script>
+      <script>
+        function logout() {
+            // Clear the history from local storage
+            localStorage.removeItem('selectedRole');
+    
+            // Redirect to index.html
+            window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
+        }
+    </script>
+<script>
+    const scriptURL1 = 'https://script.google.com/macros/s/AKfycbxxeJMTD-VnJ5TPg-pDslriNB8Dc9hQW1bdRGJwG4jJOkvPJXFZbep8hf5b0_lYioM/exec'; // Ganti dengan URL Web App Google Apps Script Anda
+
+    // Fungsi untuk memformat angka ke format Rupiah
+    function formatRupiah(angka) {
+        if (!angka) return 'Rp 0';
+
+        // Jika angka adalah string dengan simbol "Rp", hapus simbol tersebut
+        if (typeof angka === 'string') {
+            angka = angka.replace(/[^\d.-]/g, ''); // Hapus semua karakter non-angka kecuali titik dan minus
+        }
+
+        // Pastikan angka adalah angka murni
+        angka = parseFloat(angka);
+        if (isNaN(angka)) return 'Rp 0';
+
+        return '' + angka.toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).replace('IDR', '').trim();
+    }
+
+    // Fungsi untuk membaca data dari Google Apps Script
+    async function fetchData() {
+        try {
+            const response = await fetch(scriptURL1);
+            const data = await response.json();
+
+            // Perbarui elemen HTML dengan data yang diterima
+            document.querySelector('.total-pengeluaran').innerText = formatRupiah(data.total_pengeluaran || '0');
+            document.querySelector('.total-penjualan-km').innerText = data.totalpenjualkm || '0';
+            document.querySelector('.total-penjualan-dm').innerText = data.totalpenjualdm || '0';
+            document.querySelector('.transaksi-km').innerText = formatRupiah(data.transaksikm || '0');
+            document.querySelector('.transaksi-dm').innerText = formatRupiah(data.transaksidm || '0');
+            document.querySelector('.transaksi-all').innerText = formatRupiah(data.transaksiall || '0');
+            document.querySelector('.dana_bersih').innerText = formatRupiah(data.dana_bersih || '0');
+
+            document.querySelector('.td-pengeluaran').innerText = formatRupiah(data.total_pengeluaran || '0');
+            document.querySelector('.td-penjualan-km').innerText = data.totalpenjualkm || '0';
+            document.querySelector('.td-penjualan-dm').innerText = data.totalpenjualdm || '0';
+            document.querySelector('.td-transaksi-km').innerText = formatRupiah(data.transaksikm || '0');
+            document.querySelector('.td-transaksi-dm').innerText = formatRupiah(data.transaksidm || '0');
+            document.querySelector('.td-transaksi-all').innerText = formatRupiah(data.transaksiall || '0');
+            document.querySelector('.td-dana-bersih').innerText = formatRupiah(data.dana_bersih || '0');
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    // Panggil fungsi fetchData saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', fetchData);
+</script>
+<!-- |
+|
+|
+|
+|
+|
+|
+|
+|
+| -->
+
+    <script>
+        // Simple Datatable
+        let table = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table);
+    </script>
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxWixNUUOHYa-JpobKQewScbCzCeOv4i1vyXLeT0GCQ7m4EyONOEz1sq8MAk5-MnQ/exec'; // Ganti dengan URL Google Apps Script Anda
+        const tableBody = document.querySelector('#table-body');
+    
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(data => {
+                if (!data || data.length === 0) {
+                    console.log('No data found.');
+                    return;
+                }
+    
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+    
+                    tr.innerHTML = `
+                        <td style="font-size:14px">${row.id_pengeluaran || 'N/A'}</td>
+                        <td style="font-size:14px">${row.tanggal ? new Date(row.tanggal).toLocaleDateString() : 'N/A'}</td>
+                        <td style="font-size:14px">${row.kategori || 'N/A'}</td>
+                        <td style="font-size:14px">${row.deskripsi || 'N/A'}</td>
+                        <td style="font-size:14px">${row.jumlah || 'N/A'}</td>
+                        <td style="font-size:14px">${row.metode_pembayaran || 'N/A'}</td>
+                        <td style="font-size:14px">${row.keterangan || 'N/A'}</td>
+                        
+                    `;
+                    tableBody.appendChild(tr);
+                });
+    
+                // Inisialisasi Simple DataTable setelah data ditambahkan
+                new simpleDatatables.DataTable(document.querySelector('#table1'));
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+    
+</script>
+<script>
+    let currentPage = 1;
+const rowsPerPage = 10;
+
+function displayTable() {
+    let tableBody = document.getElementById("table-body");
+    let rows = tableBody.getElementsByTagName("tr");
+    let totalPages = Math.ceil(rows.length / rowsPerPage) || 1;
+    
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = (i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage) ? "" : "none";
+    }
+
+    updatePaginationControls(totalPages);
+}
+
+function updatePaginationControls(totalPages) {
+    let paginationControls = document.getElementById("pagination");
+    paginationControls.innerHTML = "";
+
+    let prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.classList.add("btn", "btn-secondary", "mx-1");
+    prevButton.disabled = currentPage === 1;
+    prevButton.onclick = function () {
+        if (currentPage > 1) {
+            currentPage--;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+        let button = document.createElement("button");
+        button.textContent = i;
+        button.classList.add("btn", "btn-primary", "mx-1");
+        if (i === currentPage) button.classList.add("active");
+        button.onclick = function () {
+            currentPage = i;
+            displayTable();
+        };
+        paginationControls.appendChild(button);
+    }
+
+    let nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.classList.add("btn", "btn-secondary", "mx-1");
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.onclick = function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(nextButton);
+}
+
+// Panggil fungsi saat data di-load
+document.addEventListener("DOMContentLoaded", function () {
+    displayTable();
+});
+
+</script>
+  
+   <script>
+   function exportToPDF() {
+       const table = document.getElementById('table1'); // Ambil elemen tabel
+       if (!table) {
+           alert("Tabel tidak ditemukan!");
+           return;
+       }
+   
+       const { jsPDF } = window.jspdf;
+       const doc = new jsPDF({
+           orientation: 'landscape', // Mode landscape
+           unit: 'mm',               // Satuan ukuran
+           format: [210, 330]        // Ukuran halaman F4 (210mm x 330mm)
+       });
+   
+       // Tambahkan judul laporan
+       doc.setFontSize(16);
+       doc.text('Laporan Data Pengeluaran Umum', 10, 10);
+   
+       // Header tabel yang akan ditampilkan
+       const headers = [
+           'ID Pengeluaran',
+           'Tanggal',
+           'Kategori',
+           'Deskripsi',
+           'Jumlah',
+           'Metode Pembayaran',
+           'Keterangan'
+       ];
+   
+       // Ambil data dari tabel
+       const rows = Array.from(table.querySelectorAll('tbody tr')).map(row => {
+           const cells = row.querySelectorAll('td');
+           return [
+               cells[0]?.innerText || 'N/A', // ID Pengeluaran
+               cells[1]?.innerText || 'N/A', // Tanggal
+               cells[2]?.innerText || 'N/A', // Kategori
+               cells[3]?.innerText || 'N/A', // Deskripsi
+               cells[4]?.innerText || 'N/A', // Jumlah
+               cells[5]?.innerText || 'N/A', // Metode Pembayaran
+               cells[6]?.innerText || 'N/A'  // Keterangan
+           ];
+       });
+   
+       // Hitung total dari kolom "Jumlah"
+       let totalJumlahSum = 0;
+       rows.forEach(row => {
+           const jumlahValue = parseFloat(row[4]?.replace('Rp ', '').replace(/\./g, '').replace(',', '.') || 0);
+           if (!isNaN(jumlahValue)) {
+               totalJumlahSum += jumlahValue;
+           }
+       });
+   
+       // Tambahkan baris total di bagian bawah tabel
+       const totalRow = Array(headers.length).fill(''); // Buat baris kosong dengan panjang sesuai header
+       totalRow[3] = 'Grand Total'; // Kolom ke-4 (Deskripsi)
+       totalRow[4] = `Rp ${totalJumlahSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-5 (Jumlah)
+       rows.push(totalRow);
+   
+       // Tambahkan tabel ke PDF
+       doc.autoTable({
+           head: [headers],
+           body: rows,
+           startY: 20,
+           styles: {
+               fontSize: 10, // Ukuran font
+               cellPadding: 3, // Padding sel
+           },
+           headStyles: {
+               fillColor: [0, 123, 255], // Warna header (biru)
+               textColor: [255, 255, 255], // Warna teks header (putih)
+           },
+           footStyles: {
+               fillColor: [240, 240, 240], // Warna footer (abu-abu terang)
+           },
+       });
+   
+       // Dapatkan tanggal saat ini
+       const currentDate = new Date();
+       const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+   
+       // Simpan file PDF dengan nama yang mencakup tanggal
+       const fileName = `Laporan_Data_Pengeluaran_Umum_${formattedDate}.pdf`;
+       doc.save(fileName);
+   }
+   </script>
+   
+<!-- |
+||
+||
+||
+||
+||
+|| -->
+
+<script>
+    // Simple Datatable
+    let table2 = document.querySelector('#table2');
+    let dataTables = new simpleDatatables.DataTable(table2);
+</script>
+<script>
+    // Fungsi untuk memformat tanggal
+    function formatTanggal(tanggal) {
+        if (!tanggal) return 'N/A';
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        return new Date(tanggal).toLocaleDateString('id-ID', options);
+    }
+
+    // Fungsi untuk memformat angka ke format Rupiah
+    function formatRupiah(angka) {
+        if (!angka) return 'Rp 0';
+        return '' + parseFloat(angka).toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).replace('IDR', '').trim();
+    }
+
+    // Ambil data dari Google Apps Script dan masukkan ke tabel
+document.addEventListener('DOMContentLoaded', async () => {
+    const invoiceScriptURL = 'https://script.google.com/macros/s/AKfycbwsJHyX57ToYevqGl99cXbZm1oSUeClVy8zcySr6fOaAYQ-pOoY277mvEbJWOUj6V4t/exec'; // Ganti dengan URL Google Apps Script Anda
+    const karyawanScriptURL = 'https://script.google.com/macros/s/AKfycbwchhYhqVXi-dU3DMTn4dfg2k9VloKGcEzJUSv_YS7qcsRlWm-rLPTSPBLhVhfh3DES/exec'; // Ganti dengan URL Google Apps Script Anda
+    const tableBody = document.querySelector('#table-body2');
+
+    try {
+        // Ambil data karyawan
+        const karyawanResponse = await fetch(karyawanScriptURL);
+        const karyawanData = await karyawanResponse.json();
+
+        // Buat mapping id_karyawan ke nama_karyawan
+        const karyawanMap = {};
+        karyawanData.forEach(karyawan => {
+            karyawanMap[karyawan.id_karyawan] = karyawan.nama_karyawan;
+        });
+
+        // Ambil data invoice
+        const invoiceResponse = await fetch(invoiceScriptURL);
+        const invoiceData = await invoiceResponse.json();
+
+        if (!invoiceData || invoiceData.length === 0) {
+            console.log('No data found.');
+            return;
+        }
+
+        // Tambahkan data ke tabel
+        invoiceData.forEach(row => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td>${row.id_invoice || 'N/A'}</td>
+                <td>${formatTanggal(row.tanggal)}</td>
+                <td>${row.periode || 'N/A'}</td>
+                <td>${karyawanMap[row.id_karyawan] || 'Tidak Ditemukan'}</td>
+                <td>${row.divisi || 'N/A'}</td>
+                <td>${row.jumlah_hari || 'N/A'}</td>
+                <td>${formatRupiah(row.invoice_perhari)}</td>
+                <td>${formatRupiah(row.jumlah_invoice)}</td>
+                <td>${row.jam_lembur || 'N/A'}</td>
+                <td>${formatRupiah(row.jumlah_lembur)}</td>
+                <td>${formatRupiah(row.jumlah_bon)}</td>
+                <td>${formatRupiah(row.potongan_bon)}</td>
+                <td>${formatRupiah(row.sisa_bon)}</td>
+                <td>${row.jenis_invoice || 'N/A'}</td>
+                <td>${formatRupiah(row.total_gaji)}</td>
+                
+            `;
+            tableBody.appendChild(tr);
+        });
+
+        // Inisialisasi Simple DataTable setelah data ditambahkan
+        new simpleDatatables.DataTable(document.querySelector('#table2'));
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+});
+</script>
+<script>
+function exportToPDF2() {
+    const table = document.getElementById('table2'); // Ambil elemen tabel
+    if (!table) {
+        alert("Tabel tidak ditemukan!");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: 'landscape', // Mode landscape
+        unit: 'mm',               // Satuan ukuran
+        format: [210, 330]        // Ukuran halaman F4 (210mm x 330mm)
+    });
+
+    // Tambahkan judul laporan
+    doc.setFontSize(16);
+    doc.text('Data Invoice', 10, 10);
+
+    // Header tabel yang akan ditampilkan
+    const headers = [
+        'Tanggal',
+        'Nama Karyawan',
+        'Divisi',
+        'Hari',
+        'Invoice Perhari',
+        'Jumlah Invoice',
+        'Jumlah Lembur',
+        'Potongan Bon',
+        'Total Gaji'
+    ];
+
+    // Ambil data dari tabel
+    const rows = Array.from(table.querySelectorAll('tbody tr')).map(row => {
+        const cells = row.querySelectorAll('td');
+        return [
+            cells[1]?.innerText || 'N/A', // Tanggal
+            cells[3]?.innerText || 'N/A', // Nama Karyawan
+            cells[4]?.innerText || 'N/A', // Divisi
+            cells[5]?.innerText || 'N/A', // Hari
+            cells[6]?.innerText || 'N/A', // Invoice Perhari
+            cells[7]?.innerText || 'N/A', // Jumlah Invoice
+            cells[9]?.innerText || 'N/A', // Jumlah Lembur
+            cells[11]?.innerText || 'N/A', // Potongan Bon
+            cells[14]?.innerText || 'N/A' // Total Gaji
+        ];
+    });
+
+    // Hitung total dari kolom "Total Gaji"
+    let totalGajiSum = 0;
+rows.forEach(row => {
+    const cleanedValue = row[8]
+        ?.replace(/[^\d.,]/g, '')  // Hapus selain angka, titik, koma
+        .replace(/\./g, '')        // Hapus pemisah ribuan
+        .replace(',', '.');        // Ganti koma jadi titik desimal
+
+    const totalGajiValue = parseFloat(cleanedValue || '0');
+    if (!isNaN(totalGajiValue)) {
+        totalGajiSum += totalGajiValue;
+    }
+});
+
+
+    // Tambahkan baris total di bagian bawah tabel
+    const totalRow = Array(headers.length).fill(''); // Buat baris kosong dengan panjang sesuai header
+    totalRow[7] = 'Grand Total'; // Kolom ke-8 (Potongan Bon)
+    totalRow[8] = `Rp ${totalGajiSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-9 (Total Gaji)
+    rows.push(totalRow);
+
+    // Tambahkan tabel ke PDF
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        startY: 20,
+        styles: {
+            fontSize: 10, // Ukuran font
+            cellPadding: 3, // Padding sel
+        },
+        headStyles: {
+            fillColor: [0, 123, 255], // Warna header (biru)
+            textColor: [255, 255, 255], // Warna teks header (putih)
+        },
+        footStyles: {
+            fillColor: [240, 240, 240], // Warna footer (abu-abu terang)
+        },
+    });
+
+    // Dapatkan tanggal saat ini
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+
+    // Simpan file PDF dengan nama yang mencakup tanggal
+    const fileName = `Data_Invoice_${formattedDate}.pdf`;
+    doc.save(fileName);
+}
+</script>
+<!-- |
+|
+|
+|
+|
+|
+| -->
+
+<script>
+    // Simple Datatable
+    let table3 = document.querySelector('#table3');
+    let dataTabless = new simpleDatatables.DataTable(table3);
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyR14e8sDnzu_YxpQcBXvUIhcxM6kCXHC0hD2Bq6WDEvJ1JP-RCyP9Vcnvr0TH5n-vH/exec'; // Ganti dengan URL Google Apps Script Anda
+    const tableBody = document.querySelector('#table-body3');
+
+    fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                console.log('No data found.');
+                return;
+            }
+
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${row.id_pakan || 'N/A'}</td>
+                    <td>${row.tanggal ? new Date(row.tanggal).toLocaleDateString() : 'N/A'}</td>
+                    <td>${row.jenis_pakan || 'N/A'}</td>
+                    <td>${row.qty || 'N/A'}</td>
+                    <td>${row.satuan || 'N/A'}</td>
+                    <td>Rp ${row.harga_satuan ? parseFloat(row.harga_satuan).toLocaleString('id-ID') : 'N/A'}</td>
+                    <td>Rp ${row.total_biaya ? parseFloat(row.total_biaya).toLocaleString('id-ID') : 'N/A'}</td>
+                    <td>${row.keterangan || 'N/A'}</td>
+                    
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            // Inisialisasi Simple DataTable setelah data ditambahkan
+            new simpleDatatables.DataTable(document.querySelector('#table3'));
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+});
+
+</script>
+<script>
+    function exportToPDF3() {
+        const table = document.getElementById('table3'); // Ambil elemen tabel
+        if (!table) {
+            alert("Tabel tidak ditemukan!");
+            return;
+        }
+    
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: 'landscape', // Mode landscape
+            unit: 'mm',               // Satuan ukuran
+            format: [210, 330]        // Ukuran halaman F4 (210mm x 330mm)
+        });
+    
+        // Tambahkan judul laporan
+        doc.setFontSize(16);
+        doc.text('Laporan Data Pakan', 10, 10);
+    
+        // Header tabel yang akan ditampilkan
+        const headers = [
+            'ID Pakan',
+            'Tanggal',
+            'Jenis Pakan',
+            'Qty',
+            'Satuan',
+            'Harga Satuan',
+            'Total Biaya',
+            'Keterangan'
+        ];
+    
+        // Ambil data dari tabel
+        const rows = Array.from(table.querySelectorAll('tbody tr')).map(row => {
+            const cells = row.querySelectorAll('td');
+            return [
+                cells[0]?.innerText || 'N/A', // ID Pakan
+                cells[1]?.innerText || 'N/A', // Tanggal
+                cells[2]?.innerText || 'N/A', // Jenis Pakan
+                cells[3]?.innerText || 'N/A', // Qty
+                cells[4]?.innerText || 'N/A', // Satuan
+                cells[5]?.innerText || 'N/A', // Harga Satuan
+                cells[6]?.innerText || 'N/A', // Total Biaya
+                cells[7]?.innerText || 'N/A'  // Keterangan
+            ];
+        });
+    
+        // Hitung total dari kolom "Total Biaya"
+        let totalBiayaSum = 0;
+        rows.forEach(row => {
+            const totalBiayaValue = parseFloat(row[6]?.replace('Rp ', '').replace(/\./g, '').replace(',', '.') || 0);
+            if (!isNaN(totalBiayaValue)) {
+                totalBiayaSum += totalBiayaValue;
+            }
+        });
+    
+        // Tambahkan baris total di bagian bawah tabel
+        const totalRow = Array(headers.length).fill(''); // Buat baris kosong dengan panjang sesuai header
+        totalRow[5] = 'Grand Total'; // Kolom ke-6 (Harga Satuan)
+        totalRow[6] = `Rp ${totalBiayaSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-7 (Total Biaya)
+        rows.push(totalRow);
+    
+        // Tambahkan tabel ke PDF
+        doc.autoTable({
+            head: [headers],
+            body: rows,
+            startY: 20,
+            styles: {
+                fontSize: 10, // Ukuran font
+                cellPadding: 3, // Padding sel
+            },
+            headStyles: {
+                fillColor: [0, 123, 255], // Warna header (biru)
+                textColor: [255, 255, 255], // Warna teks header (putih)
+            },
+            footStyles: {
+                fillColor: [240, 240, 240], // Warna footer (abu-abu terang)
+            },
+        });
+    
+        // Dapatkan tanggal saat ini
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+    
+        // Simpan file PDF dengan nama yang mencakup tanggal
+        const fileName = `Laporan_Data_Pakan_${formattedDate}.pdf`;
+        doc.save(fileName);
+    }
+    </script>
+
+
+<!-- |
+|
+|
+|
+|
+|
+| -->
+<script>
+    // Simple Datatable
+    let table4 = document.querySelector('#table4');
+    let dataTablesss = new simpleDatatables.DataTable(table4);
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzKXfKv2q2DbmYlw-Y00VYl1NdYqAtNwzuf5TggPmRQVEf1vRlbnBzhIklgl-b3eDTO/exec'; // Ganti dengan URL Google Apps Script Anda
+    const tableBody = document.querySelector('#table-body4');
+
+    fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                console.log('No data found.');
+                return;
+            }
+
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.idTransaksi || 'N/A'}</td>
+                    <td>${row.tanggal ? new Date(row.tanggal).toLocaleDateString('id-ID') : 'N/A'}</td>
+                    <td>${row.kodeProduk || 'N/A'}</td>
+                    <td>${row.namaPembeli || 'N/A'}</td>
+                    <td>${row.kontakPembeli || 'N/A'}</td>
+                    <td>${row.jenisHewan || 'N/A'}</td>
+                    <td>${row.rasHewan || 'N/A'}</td>
+                    <td>${row.satuan || 'N/A'}</td>
+                    <td>${row.quantity || 'N/A'}</td>
+                    <td>Rp ${row.hargahewan ? parseFloat(row.hargahewan).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}</td>
+                    <td>${row.metodePembayaran || 'N/A'}</td>
+                    <td>${row.namaPenjual || 'N/A'}</td>
+                    <td>${row.norek || 'N/A'}</td>
+                    <td>${row.atasnama || 'N/A'}</td>
+                    <td>Rp ${row.total ? parseFloat(row.total).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}</td>
+                  
+                `;
+                tableBody.appendChild(tr);
+            });
+
+
+            // Inisialisasi Simple DataTable setelah data ditambahkan
+            new simpleDatatables.DataTable(document.querySelector('#table4'));
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+});
+
+</script>
+<script>
+    function exportToPDF4() {   
+        const table2 = document.getElementById('table4'); // Ambil elemen tabel
+        if (!table2) {
+            alert("Tabel tidak ditemukan!");
+            return;
+        }
+    
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: 'landscape', // Mode landscape
+            unit: 'mm',               // Satuan ukuran
+            format: [210, 330]        // Ukuran halaman F4 (210mm x 330mm)
+        });
+    
+        // Tambahkan judul laporan
+        doc.setFontSize(16);
+        doc.text('Laporan Transaksi Masuk', 10, 10);
+    
+        // Header tabel yang akan ditampilkan
+        const headers = [
+            'Tanggal',
+            'Kode Produk',
+            'Nama Pembeli',
+            'Jenis Hewan',
+            'Ras Hewan',
+            'Satuan',
+            'Quantity',
+            'Harga Hewan',
+            'Total'
+        ];
+    
+        // Ambil data dari tabel
+        const rows = Array.from(table2.querySelectorAll('tbody tr')).map(row => {
+            const cells = row.querySelectorAll('td');
+            return [
+                cells[1]?.innerText || 'N/A', // Tanggal
+                cells[2]?.innerText || 'N/A', // Kode Produk
+                cells[3]?.innerText || 'N/A', // Nama Pembeli
+                cells[5]?.innerText || 'N/A', // Jenis Hewan
+                cells[6]?.innerText || 'N/A', // Ras Hewan
+                cells[7]?.innerText || 'N/A', // Satuan
+                cells[8]?.innerText || 'N/A', // Quantity
+                cells[9]?.innerText || 'N/A', // Harga Hewan
+                cells[14]?.innerText || 'N/A' // Total
+            ];
+        });
+    
+        // Hitung total dari kolom "Total"
+        let totalSum = 0;
+        rows.forEach(row => {
+            const totalValue = parseFloat(row[8]?.replace('Rp ', '').replace(/\./g, '').replace(',', '.') || 0);
+            if (!isNaN(totalValue)) {
+                totalSum += totalValue;
+            }
+        });
+    
+        // Tambahkan baris total di bagian bawah tabel
+        const totalRow = Array(headers.length).fill(''); // Buat baris kosong dengan panjang sesuai header
+        totalRow[7] = 'Grand Total'; // Kolom ke-8 (Harga Hewan)
+        totalRow[8] = `Rp ${totalSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-9 (Total)
+        rows.push(totalRow);
+    
+        // Tambahkan tabel ke PDF
+        doc.autoTable({
+            head: [headers],
+            body: rows,
+            startY: 20,
+            styles: {
+                fontSize: 10, // Ukuran font
+                cellPadding: 3, // Padding sel
+            },
+            headStyles: {
+                fillColor: [0, 123, 255], // Warna header (biru)
+                textColor: [255, 255, 255], // Warna teks header (putih)
+            },
+            footStyles: {
+                fillColor: [240, 240, 240], // Warna footer (abu-abu terang)
+            },
+        });
+    
+        // Dapatkan tanggal saat ini
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+    
+        // Simpan file PDF dengan nama yang mencakup tanggal
+        const fileName = `Laporan_Transaksi_Masuk_${formattedDate}.pdf`;
+        doc.save(fileName);
+    }
+    </script>
+    
+<!-- |
+|
+|
+|
+|
+|
+| -->
+
+<!-- html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<script>
+    function exportToPDFSummaryFull() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm',
+            format: [210, 330] // F4
+        });
+    
+        // Judul
+        doc.setFontSize(16);
+        doc.text('Ringkasan Laporan Keuangan', 10, 10);
+    
+        // Header tabel
+        const headers = ['Kategori', 'Nilai'];
+    
+        // Ambil data dari elemen HTML
+        const data = [
+            
+            ['Total Penjualan Kambing', document.querySelector('.total-penjualan-km')?.innerText || 'N/A'],
+            ['Total Penjualan Domba', document.querySelector('.total-penjualan-dm')?.innerText || 'N/A'],
+            ['Transaksi Kambing', document.querySelector('.transaksi-km')?.innerText || 'N/A'],
+            ['Transaksi Domba', document.querySelector('.transaksi-dm')?.innerText || 'N/A'],
+            ['Transaksi All', document.querySelector('.transaksi-all')?.innerText || 'N/A'],
+            ['Total Pengeluaran', document.querySelector('.total-pengeluaran')?.innerText || 'N/A'],
+            ['Dana Bersih', document.querySelector('.dana_bersih')?.innerText || 'N/A']
+        ];
+    
+        // Masukkan data ke dalam PDF
+        doc.autoTable({
+            head: [headers],
+            body: data,
+            startY: 20,
+            styles: {
+                fontSize: 10,
+                cellPadding: 4,
+            },
+            headStyles: {
+                fillColor: [0, 123, 255],
+                textColor: [255, 255, 255],
+            }
+        });
+    
+        // Simpan file PDF
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        const fileName = `Ringkasan_Keuangan_Lengkap_${formattedDate}.pdf`;
+    
+        doc.save(fileName);
+    }
+    
+    </script>
+
+    <!-- ||
+    ||
+    ||
+    ||
+    ||
+    || -->
+    
+ <!-- Simple DataTables CSS -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+ <!-- Simple DataTables JS -->
+ <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+ 
+ <!-- Bootstrap JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>    
+
+
+</body>
+</html>

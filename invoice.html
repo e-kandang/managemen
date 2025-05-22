@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Kandang || Data Bon</title>
+    <link rel="icon" href="assets/images/log2.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+   
+   
+    <style>
+        .modal-dialog {
+            max-width: 50%; /* Sesuaikan lebar modal */
+        }
+    </style>
+    <style>
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 90%; /* Sesuaikan lebar modal untuk perangkat kecil */
+            margin: 1rem auto; /* Tambahkan margin agar modal tidak terlalu menempel */
+        }
+    }
+
+    @media (min-width: 769px) {
+        .modal-dialog {
+            max-width: 50%; /* Lebar modal untuk perangkat besar */
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="../home.html"><img src="assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="home.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="pencarian.html" class='sidebar-link'>
+                                <i class="bi bi-search"></i>
+                                <span>Pencarian Hewan</span>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="sidebar-title">Menu Extra</li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Data Master</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="karyawan.html">Data Karyawan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="hewan.html">Data Hewan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="jenis.html">Data Jenis</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="ras.html">Data Ras</a>
+                                </li>
+                                <li class="submenu-item active">
+                                    <a href="indukan.html">Data Indukan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="pejantan.html">Data Pejantan</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-cash"></i>
+
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="Trnsaksi_masuk.html">Transaksi Masuk</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-receipt-cutoff"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="pengeluaran_umum.html">Pengeluaran Umum</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="invoice.html">Invoice</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="bon.html">Bon</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="laporanall.html">Laporan All</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        <!-- <li class="sidebar-item">
+                            <a href="pengaturan.html" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0);" class="sidebar-link" onclick="logout()">
+                                <i class="bi bi-box-arrow-right"></i>
+
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Data Invoice</h3>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:justify-end sm:space-x-2 space-y-2 sm:space-y-0 m-3">
+                    <a href="form/form-invoice.html" class="btn btn-primary">Tambah Invoice</a>
+                    <a href="nota_invoice.html" class="btn btn-secondary">Cetak Invoice</a>
+                    <button class="btn btn-success mt-2" onclick="exportToExcel()">Export to Excel</button>
+                    <button class="btn btn-danger mt-2" onclick="exportToPDF()">Export to PDF</button>
+                </div>
+                
+                
+                <section class="section">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <div class="d-flex justify-content-between mb-3">
+                                <a class="mb-0">Data Casis</a>
+                                 <input type="text" id="search-input" placeholder="Cari data..." class="form-control w-25" onkeyup="searchTable()"> 
+                            </div> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Invoice</th>
+                                            <th>Tanggal</th>
+                                            <th>Periode</th>
+                                            <th>Nama Karyawan</th>
+                                            <th>Divisi</th>
+                                            <th>Jumlah Hari</th>
+                                            <th>Invoice Perhari</th>
+                                            <th>Jumlah Invoice</th>
+                                            <th>Jam Lembur</th>
+                                            <th>Jumlah Lembur</th>
+                                            <th>Jumlah Bon</th>
+                                            <th>Potongan Bon</th>
+                                            <th>Sisa Bon</th>
+                                            <th>Jenis Invoice</th>
+                                            <th>Total Gaji</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-body">
+                                        <!-- Data akan dimasukkan di sini -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; AGA</p>
+                    </div>
+                    <div class="float-end">
+                        <p>By <a
+                                href="">Aga Developer</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"> <!-- Tambahkan modal-dialog-centered untuk memusatkan modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Update Data Invoice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <div class="form-group mb-3">
+                        <label for="id_invoice">ID Invoice</label>
+                        <input type="text" id="id_invoice" class="form-control" name="id_invoice" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="date" id="tanggal" class="form-control" name="tanggal" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="periode">Periode</label>
+                        <input type="text" id="periode" class="form-control" name="periode" required>
+                    </div>
+                    <!-- Nama Karyawan -->
+                    <div class="form-group">
+                              <label for="id_karyawan">id karyawan</label>
+                              <select id="id_karyawan" class="form-select" name="id_karyawan" required>
+                                  <option value="0" disabled selected>Pilih nama karyawan</option>
+                                  <!-- Opsi akan diisi secara dinamis -->
+                              </select>
+                          </div>
+                     <!-- Divisi -->
+                     <div class="col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="divisi">divisi</label>
+                                  <select id="divisi" class="form-select" name="divisi" required>
+                                      <option value="" disabled selected>Pilih divisi</option>
+                                      <option value="Manager">Manager</option>
+                                      <option value="Staff">Staff</option>
+                                      <option value="Supervisor">Supervisor</option>
+                                      <option value="Admin">Admin</option>
+                                  </select>
+                              </div>
+                          </div>
+                    <div class="form-group mb-3">
+                        <label for="jumlah_hari">Jumlah Hari</label>
+                        <input type="number" id="jumlah_hari" class="form-control" name="jumlah_hari" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="invoice_perhari">Invoice Perhari</label>
+                        <input type="number" id="invoice_perhari" class="form-control" name="invoice_perhari" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="jumlah_invoice">Jumlah Invoice</label>
+                        <input type="number" id="jumlah_invoice" class="form-control" name="jumlah_invoice" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="jam_lembur">Jam Lembur</label>
+                        <input type="number" id="jam_lembur" class="form-control" name="jam_lembur" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="jumlah_lembur">Jumlah Lembur</label>
+                        <input type="number" id="jumlah_lembur" class="form-control" name="jumlah_lembur" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="jumlah_bon">Jumlah Bon</label>
+                        <input type="number" id="jumlah_bon" class="form-control" name="jumlah_bon" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="potongan_bon">Potongan Bon</label>
+                        <input type="number" id="potongan_bon" class="form-control" name="potongan_bon" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="sisa_bon">Sisa Bon</label>
+                        <input type="number" id="sisa_bon" class="form-control" name="sisa_bon" readonly>
+                    </div>
+                    
+                    <div class="col-md-6 col-12">
+                              <div class="form-group">
+                                  <label for="jenis_invoice">jenis invoice</label>
+                                  <select id="jenis_invoice" class="form-select" name="jenis_invoice" required>
+                                      <option value="" disabled selected>Pilih jenis invoice</option>
+                                      <option value="Cash">Cash</option>
+                                      <option value="Transfer">Transfer</option>
+                                    
+                                  </select>
+                              </div>
+                          </div>
+                    <div class="form-group mb-3">
+                        <label for="total_gaji">Total Gaji</label>
+                        <input type="number" id="total_gaji" class="form-control" name="total_gaji" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary w-100 btn-kirim">Update</button>
+                        <button class="btn btn-primary w-100 btn-loading d-none" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    
+<script>
+    // URL Web App dari Apps Script
+    const url = 'https://script.google.com/macros/s/AKfycby3zbUhxNKLzBFDoHFFNi0TtNj4_eRjBm7dknKESSfrCrZz-ZymBa87PlWk_8YpjZ6M/exec'; // Ganti dengan URL Web App Anda
+
+    // Ambil data dari Apps Script dan tambahkan ke dropdown
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.getElementById('id_karyawan');
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id_karyawan; // ID dari spreadsheet
+                    option.textContent = item.nama_karyawan; // Nama dari spreadsheet
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+ <script>
+          
+    document.addEventListener('DOMContentLoaded', () => {
+          const jumlahHariInput = document.getElementById('jumlah_hari');
+          const invoicePerhariInput = document.getElementById('invoice_perhari');
+          const jumlahInvoiceInput = document.getElementById('jumlah_invoice');
+          const jumlahBonInput = document.getElementById('jumlah_bon');
+          const potonganBonInput = document.getElementById('potongan_bon');
+          const sisaBonInput = document.getElementById('sisa_bon');
+          const jumlahLemburInput = document.getElementById('jumlah_lembur');
+          const totalGajiInput = document.getElementById('total_gaji');
+  
+          // Hitung Jumlah Invoice
+          jumlahHariInput.addEventListener('input', calculateInvoice);
+          invoicePerhariInput.addEventListener('input', calculateInvoice);
+  
+          function calculateInvoice() {
+              const jumlahHari = parseFloat(jumlahHariInput.value) || 0;
+              const invoicePerhari = parseFloat(invoicePerhariInput.value) || 0;
+              jumlahInvoiceInput.value = jumlahHari * invoicePerhari;
+              calculateTotalGaji();
+          }
+  
+          // Hitung Sisa Bon
+          jumlahBonInput.addEventListener('input', calculateSisaBon);
+          potonganBonInput.addEventListener('input', calculateSisaBon);
+  
+          function calculateSisaBon() {
+              const jumlahBon = parseFloat(jumlahBonInput.value) || 0;
+              const potonganBon = parseFloat(potonganBonInput.value) || 0;
+  
+              if (potonganBon > jumlahBon) {
+                  alert('Potongan bon melebihi jumlah bon!');
+                  potonganBonInput.value = jumlahBon;
+              }
+  
+              sisaBonInput.value = jumlahBon - potonganBon;
+              calculateTotalGaji();
+          }
+  
+          // Hitung Total Gaji
+          jumlahLemburInput.addEventListener('input', calculateTotalGaji);
+  
+          function calculateTotalGaji() {
+              const jumlahInvoice = parseFloat(jumlahInvoiceInput.value) || 0;
+              const jumlahLembur = parseFloat(jumlahLemburInput.value) || 0;
+              const potonganBon = parseFloat(potonganBonInput.value) || 0;
+  
+              totalGajiInput.value = jumlahInvoice + jumlahLembur - potonganBon;
+          }
+      });
+ </script>
+ 
+<script>
+          function fetchDataById(id_invoice) {
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbw4zzHvTxVe1JZtGbtv2cS3sM6wJszB2-UY71Ts11JmBG6KAAHesTRQ-fBb6LkMUXmJ/exec'; // Ganti dengan URL Google Apps Script Anda
+                    const fullURL = `${scriptURL}?id_invoice=${id_invoice}`;
+                
+                    return fetch(fullURL)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (Array.isArray(data) && data.length > 0) {
+                                return data.find(item => item.id_invoice === id_invoice) || null;
+                            } else {
+                                throw new Error('Data tidak ditemukan');
+                            }
+                        })
+                        .catch(error => console.error('Error fetching data:', error));
+                }
+                function openEditModal(id_invoice) {
+                    fetchDataById(id_invoice).then(rowData => {
+                        if (!rowData) {
+                            alert('Data tidak ditemukan!');
+                            return;
+                        }
+                
+                        // Isi data ke dalam modal
+                        document.getElementById('id_invoice').value = rowData.id_invoice;
+                        document.getElementById('tanggal').value = rowData.tanggal 
+                            ? new Date(rowData.tanggal).toISOString().split('T')[0] 
+                            : '';
+                        document.getElementById('periode').value = rowData.periode;
+                        document.getElementById('id_karyawan').value = rowData.id_karyawan;
+                        document.getElementById('divisi').value = rowData.divisi;
+                        document.getElementById('jumlah_hari').value = rowData.jumlah_hari;
+                        document.getElementById('invoice_perhari').value = rowData.invoice_perhari;
+                        document.getElementById('jumlah_invoice').value = rowData.jumlah_invoice;
+                        document.getElementById('jam_lembur').value = rowData.jam_lembur;
+                        document.getElementById('jumlah_lembur').value = rowData.jumlah_lembur;
+                        document.getElementById('jumlah_bon').value = rowData.jumlah_bon;
+                        document.getElementById('potongan_bon').value = rowData.potongan_bon;
+                        document.getElementById('sisa_bon').value = rowData.sisa_bon;
+                        document.getElementById('jenis_invoice').value = rowData.jenis_invoice;
+                        document.getElementById('total_gaji').value = rowData.total_gaji;
+                
+                        // Tampilkan modal
+                        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                        editModal.show();
+                    });
+                }
+    document.addEventListener('DOMContentLoaded', async () => {
+        const invoiceScriptURL = 'https://script.google.com/macros/s/AKfycbwchhYhqVXi-dU3DMTn4dfg2k9VloKGcEzJUSv_YS7qcsRlWm-rLPTSPBLhVhfh3DES/exec'; // Ganti dengan URL Google Apps Script Anda
+        const karyawanScriptURL = 'https://script.google.com/macros/s/AKfycbwchhYhqVXi-dU3DMTn4dfg2k9VloKGcEzJUSv_YS7qcsRlWm-rLPTSPBLhVhfh3DES/exec'; // Ganti dengan URL Google Apps Script Anda
+        const tableBody = document.querySelector('#table-body');
+
+        try {
+            // Ambil data karyawan
+            const karyawanResponse = await fetch(karyawanScriptURL);
+            const karyawanData = await karyawanResponse.json();
+
+            // Buat mapping id_karyawan ke nama_karyawan
+            const karyawanMap = {};
+            karyawanData.forEach(karyawan => {
+                karyawanMap[karyawan.id_karyawan] = karyawan.nama_karyawan;
+            });
+
+            // Ambil data invoice
+            const invoiceResponse = await fetch(invoiceScriptURL);
+            const invoiceData = await invoiceResponse.json();
+
+            if (!invoiceData || invoiceData.length === 0) {
+                console.log('No data found.');
+                return;
+            }
+
+            // Tambahkan data ke tabel
+            invoiceData.forEach(row => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${row.id_invoice || 'N/A'}</td>
+                    <td>${formatTanggal(row.tanggal)}</td>
+                    <td>${row.periode || 'N/A'}</td>
+                    <td>${karyawanMap[row.id_karyawan] || 'Tidak Ditemukan'}</td>
+                    <td>${row.divisi || 'N/A'}</td>
+                    <td>${row.jumlah_hari || 'N/A'}</td>
+                    <td>${formatRupiah(row.invoice_perhari)}</td>
+                    <td>${formatRupiah(row.jumlah_invoice)}</td>
+                    <td>${row.jam_lembur || 'N/A'}</td>
+                    <td>${formatRupiah(row.jumlah_lembur)}</td>
+                    <td>${formatRupiah(row.jumlah_bon)}</td>
+                    <td>${formatRupiah(row.potongan_bon)}</td>
+                    <td>${formatRupiah(row.sisa_bon)}</td>
+                    <td>${row.jenis_invoice || 'N/A'}</td>
+                    <td>${formatRupiah(row.total_gaji)}</td>
+                    <td>
+                        <!-- <i class="fa fa-edit m-1" onclick="openEditModal('${row.id_invoice}')"></i> -->
+                     <i 
+                    class="fa fa-trash text-red-500 hover:text-red-700 cursor-pointer m-1" 
+                    onclick="deleteEntry('${row.id_invoice}', ${row.potongan_bon}, '${row.id_karyawan}')"
+                    ></i>
+
+
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            // Inisialisasi Simple DataTable setelah data ditambahkan
+            new simpleDatatables.DataTable(document.querySelector('#table1'));
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+</script>
+
+    <script>
+        function searchTable() {
+            // Mendapatkan nilai input pencarian
+            const input = document.getElementById('search-input');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('table1');
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rows = tbody.getElementsByTagName('tr');
+
+            // Loop melalui semua baris tabel dan sembunyikan yang tidak cocok
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let found = false;
+
+                // Loop melalui semua sel dalam baris
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        const cellValue = cells[j].textContent || cells[j].innerText;
+                        if (cellValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Tampilkan atau sembunyikan baris berdasarkan pencarian
+                rows[i].style.display = found ? "" : "none";
+            }
+        }
+    </script>
+
+
+    <script>
+          document.getElementById('editForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                
+                    const btnKirim = document.querySelector('.btn-kirim');
+                    const btnLoading = document.querySelector('.btn-loading');
+                
+                    btnKirim.classList.add('d-none');
+                    btnLoading.classList.remove('d-none');
+                
+                    const url = 'https://script.google.com/macros/s/AKfycbzVS9rhc1cKFTF9wDT-sxfos6NkWw7xWwSBU0nWFWg8M3i9Kfq_J_wj-r98YK6iZ8ke/exec'; // Ganti dengan URL Google Apps Script Anda
+                
+                    // Ambil nilai input dari form
+                    const id_invoice = document.getElementById('id_invoice').value;
+                    const tanggal = document.getElementById('tanggal').value;
+                    const periode = document.getElementById('periode').value;
+                    const id_karyawan = document.getElementById('id_karyawan').value;
+                    const divisi = document.getElementById('divisi').value;
+                    const jumlah_hari = parseFloat(document.getElementById('jumlah_hari').value) || 0;
+                    const invoice_perhari = parseFloat(document.getElementById('invoice_perhari').value) || 0;
+                    const jam_lembur = parseFloat(document.getElementById('jam_lembur').value) || 0;
+                    const jumlah_lembur = parseFloat(document.getElementById('jumlah_lembur').value) || 0;
+                    const jumlah_bon = parseFloat(document.getElementById('jumlah_bon').value) || 0;
+                    const potongan_bon = parseFloat(document.getElementById('potongan_bon').value) || 0;
+                    const jenis_invoice = document.getElementById('jenis_invoice').value;
+                
+                    // Hitung nilai otomatis
+                    const jumlah_invoice = jumlah_hari * invoice_perhari;
+                    const sisa_bon = jumlah_bon - potongan_bon;
+                    const total_gaji = jumlah_invoice + jumlah_lembur - potongan_bon;
+                
+                    // Validasi potongan bon
+                    if (potongan_bon > jumlah_bon) {
+                        alert('Potongan bon tidak boleh lebih besar dari jumlah bon.');
+                        btnLoading.classList.add('d-none');
+                        btnKirim.classList.remove('d-none');
+                        return;
+                    }
+                
+                    // Siapkan data untuk dikirim
+                    const params = {
+                        func: 'UPDATE',
+                        data: {
+                            id_invoice,
+                            tanggal,
+                            periode,
+                            id_karyawan,
+                            divisi,
+                            jumlah_hari,
+                            invoice_perhari,
+                            jumlah_invoice,
+                            jam_lembur,
+                            jumlah_lembur,
+                            jumlah_bon,
+                            potongan_bon,
+                            sisa_bon,
+                            jenis_invoice,
+                            total_gaji
+                        },
+                        SH: 'invoice' // Nama sheet yang sesuai
+                    };
+                
+                    // Kirim data ke Google Apps Script
+                    fetch(url, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(params)
+                    })
+                    .then(() => {
+                        alert('Berhasil: Data berhasil diupdate.');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error updating entry:', error);
+                        alert('Terjadi kesalahan saat mencoba memperbarui data.');
+                    })
+                    .finally(() => {
+                        btnLoading.classList.add('d-none');
+                        btnKirim.classList.remove('d-none');
+                    });
+                });
+    </script>
+   
+<script>
+    let currentPage = 1;
+const rowsPerPage = 10;
+
+function displayTable() {
+    let tableBody = document.getElementById("table-body");
+    let rows = tableBody.getElementsByTagName("tr");
+    let totalPages = Math.ceil(rows.length / rowsPerPage) || 1;
+    
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = (i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage) ? "" : "none";
+    }
+
+    updatePaginationControls(totalPages);
+}
+
+function updatePaginationControls(totalPages) {
+    let paginationControls = document.getElementById("pagination");
+    paginationControls.innerHTML = "";
+
+    let prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.classList.add("btn", "btn-secondary", "mx-1");
+    prevButton.disabled = currentPage === 1;
+    prevButton.onclick = function () {
+        if (currentPage > 1) {
+            currentPage--;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+        let button = document.createElement("button");
+        button.textContent = i;
+        button.classList.add("btn", "btn-primary", "mx-1");
+        if (i === currentPage) button.classList.add("active");
+        button.onclick = function () {
+            currentPage = i;
+            displayTable();
+        };
+        paginationControls.appendChild(button);
+    }
+
+    let nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.classList.add("btn", "btn-secondary", "mx-1");
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.onclick = function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(nextButton);
+}
+
+// Panggil fungsi saat data di-load
+document.addEventListener("DOMContentLoaded", function () {
+    displayTable();
+});
+
+</script>
+    <!-- Simple DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+<!-- Simple DataTables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+<script>
+    function logout() {
+        // Clear the history from local storage
+        localStorage.removeItem('selectedRole');
+
+        // Redirect to index.html
+        window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
+    }
+</script>
+
+
+
+<script>
+    function deleteEntry(id_invoice, potongan, id_karyawan) {
+        const confirmation = confirm('Apakah Anda yakin ingin menghapus data ini?');
+        if (!confirmation) return;
+    
+        const url = 'https://script.google.com/macros/s/AKfycbz7MOKV8FxIF_KXv7LYuC8GjPMaAw-I6WDmY1cVXVz_avn2fPUah4PvWsVA-gMofAot/exec'; // Ganti dengan URL Apps Script kamu
+        const params = {
+            func: 'DELETE',
+            id_invoice: id_invoice,
+            potongan: potongan,
+            id_karyawan: id_karyawan,
+            SH: 'invoice'
+        };
+    
+        fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(params)
+        })
+        .then(() => {
+            alert('Berhasil: Data dihapus dan potongan bon dikembalikan.');
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error deleting entry:', error);
+            alert('Terjadi kesalahan saat menghapus data.');
+        });
+    }
+    
+</script>
+
+<script>
+function formatTanggal(tanggal) {
+    if (!tanggal) return 'N/A';
+    const date = new Date(tanggal);
+    return date.toISOString().split('T')[0]; // Format YYYY-MM-DD
+}
+</script>
+
+<script>
+function formatRupiah(angka) {
+    if (!angka) return 'Rp 0';
+    return 'Rp ' + parseFloat(angka).toLocaleString('id-ID', { minimumFractionDigits: 0 });
+}
+</script>
+
+<script>
+function exportToExcel() {
+    const table = document.getElementById('table1'); // Ambil elemen tabel
+    if (!table) {
+        alert("Tabel tidak ditemukan!");
+        return;
+    }
+
+    const workbook = XLSX.utils.book_new(); // Buat workbook baru
+
+    // Ambil data dari tabel dan konversi ke worksheet
+    const sheetData = [
+        Array.from(table.querySelectorAll('thead th')).map(th => th.innerText), // Header tabel
+        ...Array.from(table.querySelectorAll('tbody tr')).map(row =>
+            Array.from(row.querySelectorAll('td')).map(cell => cell.innerText)
+        ) // Data tabel
+    ];
+
+    // Hitung total dari kolom "Total Gaji" (kolom ke-15, indeks 14)
+    let totalGajiSum = 0;
+    Array.from(table.querySelectorAll('tbody tr')).forEach(row => {
+        const totalGajiCell = row.querySelectorAll('td')[14]; // Kolom ke-15
+        if (totalGajiCell) {
+            const totalGajiValue = parseFloat(totalGajiCell.innerText.replace('Rp ', '').replace(/\./g, '').replace(',', '.'));
+            if (!isNaN(totalGajiValue)) {
+                totalGajiSum += totalGajiValue;
+            }
+        }
+    });
+
+    // Tambahkan baris total di bagian bawah tabel
+    const totalRow = Array(sheetData[0].length).fill(''); // Buat baris kosong dengan panjang sesuai header
+    totalRow[13] = 'Grand Total'; // Kolom ke-14 (Jenis Invoice)
+    totalRow[14] = `Rp ${totalGajiSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-15 (Total Gaji)
+    sheetData.push(totalRow);
+
+    // Konversi data ke worksheet
+    const worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+
+    // Tambahkan border ke setiap sel
+    const range = XLSX.utils.decode_range(worksheet['!ref']);
+    for (let row = range.s.r; row <= range.e.r; row++) {
+        for (let col = range.s.c; col <= range.e.c; col++) {
+            const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+            if (!worksheet[cellAddress]) continue; // Lewati jika sel kosong
+            if (!worksheet[cellAddress].s) worksheet[cellAddress].s = {}; // Tambahkan properti style jika belum ada
+            worksheet[cellAddress].s.border = {
+                top: { style: "thin", color: { rgb: "000000" } },
+                bottom: { style: "thin", color: { rgb: "000000" } },
+                left: { style: "thin", color: { rgb: "000000" } },
+                right: { style: "thin", color: { rgb: "000000" } }
+            };
+        }
+    }
+
+    // Tambahkan worksheet ke workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Data Invoice");
+
+    // Dapatkan tanggal saat ini
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+
+    // Simpan file Excel dengan nama yang mencakup tanggal
+    const fileName = `Data_Invoice_${formattedDate}.xlsx`;
+    XLSX.writeFile(workbook, fileName);
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script>
+function exportToPDF() {
+    const table = document.getElementById('table1'); // Ambil elemen tabel
+    if (!table) {
+        alert("Tabel tidak ditemukan!");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: 'landscape', // Mode landscape
+        unit: 'mm',               // Satuan ukuran
+        format: [210, 330]        // Ukuran halaman F4 (210mm x 330mm)
+    });
+
+    // Tambahkan judul laporan
+    doc.setFontSize(16);
+    doc.text('Data Invoice', 10, 10);
+
+    // Header tabel yang akan ditampilkan
+    const headers = [
+        'Tanggal',
+        'Nama Karyawan',
+        'Divisi',
+        'Hari',
+        'Invoice Perhari',
+        'Jumlah Invoice',
+        'Jumlah Lembur',
+        'Potongan Bon',
+        'Total Gaji'
+    ];
+
+    // Ambil data dari tabel
+    const rows = Array.from(table.querySelectorAll('tbody tr')).map(row => {
+        const cells = row.querySelectorAll('td');
+        return [
+            cells[1]?.innerText || 'N/A', // Tanggal
+            cells[3]?.innerText || 'N/A', // Nama Karyawan
+            cells[4]?.innerText || 'N/A', // Divisi
+            cells[5]?.innerText || 'N/A', // Hari
+            cells[6]?.innerText || 'N/A', // Invoice Perhari
+            cells[7]?.innerText || 'N/A', // Jumlah Invoice
+            cells[9]?.innerText || 'N/A', // Jumlah Lembur
+            cells[11]?.innerText || 'N/A', // Potongan Bon
+            cells[14]?.innerText || 'N/A' // Total Gaji
+        ];
+    });
+
+    // Hitung total dari kolom "Total Gaji"
+    let totalGajiSum = 0;
+    rows.forEach(row => {
+        const totalGajiValue = parseFloat(row[8]?.replace('Rp ', '').replace(/\./g, '').replace(',', '.') || 0);
+        if (!isNaN(totalGajiValue)) {
+            totalGajiSum += totalGajiValue;
+        }
+    });
+
+    // Tambahkan baris total di bagian bawah tabel
+    const totalRow = Array(headers.length).fill(''); // Buat baris kosong dengan panjang sesuai header
+    totalRow[7] = 'Grand Total'; // Kolom ke-8 (Potongan Bon)
+    totalRow[8] = `Rp ${totalGajiSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-9 (Total Gaji)
+    rows.push(totalRow);
+
+    // Tambahkan tabel ke PDF
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        startY: 20,
+        styles: {
+            fontSize: 10, // Ukuran font
+            cellPadding: 3, // Padding sel
+        },
+        headStyles: {
+            fillColor: [0, 123, 255], // Warna header (biru)
+            textColor: [255, 255, 255], // Warna teks header (putih)
+        },
+        footStyles: {
+            fillColor: [240, 240, 240], // Warna footer (abu-abu terang)
+        },
+    });
+
+    // Dapatkan tanggal saat ini
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+
+    // Simpan file PDF dengan nama yang mencakup tanggal
+    const fileName = `Data_Invoice_${formattedDate}.pdf`;
+    doc.save(fileName);
+}
+</script>
+</html>

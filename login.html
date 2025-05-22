@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>E-Kandang || Halaman Login</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/log2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+    <div class="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+        <!-- Tombol Logout Icon -->
+        <button onclick="logout()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+        <div class="flex items-center justify-center mb-6">
+            <img src="assets/images/log2.png" alt="Logo" width="80" height="80" />
+            <!-- <span class="text-2xl font-semibold">E-KANDANG</span> -->
+        </div>
+        <p class="text-center text-gray-500 mb-6">Aplikasi Management Kandang</p>
+        <form id="classForm">
+            <div class="mb-4">
+                <!-- <label class="block text-gray-700" for="selectedRole">Pilih Opsi</label> -->
+                <select id="selectedRole" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="kasir">Kasir</option>
+                    <option value="managemenapp">Management App</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 p-2">
+                Pilih Opsi
+            </button>
+        </form>
+        <p class="text-center text-gray-500 mt-6">
+            Ada Masalah? 
+            <a href="https://wa.me/6282289635649" class="text-blue-500">Kontak Aga Oficial</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('classForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedValue = document.getElementById('selectedRole').value;
+
+            // Simpan data ke localStorage
+              localStorage.setItem('selectedRole', selectedValue);
+
+            if (selectedValue.toLowerCase().includes('kasir')) {
+                window.location.href = 'kasir.html';
+            } else {
+                window.location.href = 'home.html';
+            }
+        });
+
+         // Cek apakah username ada di localStorage
+         if (localStorage.getItem('selectedRole')) {
+            // Arahkan langsung ke halaman dashboard
+            var role = localStorage.getItem('selectedRole'); // Ambil peran pengguna dari localStorage
+            if (role === 'kasir') {
+                window.location.href = 'kasir.html';
+            } else if (role === 'managemenapp') {
+                window.location.href = 'home.html';
+            }
+        }
+    </script>
+    
+    <script>
+        function logout() {
+            const username = localStorage.getItem('username'); // Get the username from local storage
+    
+            // Check if username exists
+            if (username) {
+                const deleteUrl = `https://script.google.com/macros/s/AKfycby-z0MhRrpuWpWGswGdKUL2DWeFqmbxp0FZ3K987acbvpGlOaJMKKgodRpzWXcxTpoM/exec?username=${encodeURIComponent(username)}&action=delete`; // Replace with your actual Google Apps Script URL
+    
+                fetch(deleteUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Data deleted successfully:', data);
+                        // Clear the history from local storage
+                     
+                        localStorage.removeItem('role');
+    
+                        // Redirect to index.html
+                        window.location.href = 'index.html'; // Change 'index.html' to your actual homepage if different
+                    })
+                    .catch(error => {
+                        console.error('Error deleting data:', error);
+                        // Optionally, clear local storage and redirect even if deletion fails
+                       
+                        localStorage.removeItem('role');
+                        window.location.href = 'index.html';
+                    });
+            } else {
+                // If no username is found, just redirect
+             
+                localStorage.removeItem('role');    
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

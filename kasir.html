@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Flexy lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Flexy admin lite design, Flexy admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description" content="Flexy Admin Lite is powerful and clean admin dashboard template, inspired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Kasir Pembelian Hewan</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/LOG2.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+    <link href="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .menu-bar {
+            background-color: #007bff;
+            padding: 10px;
+        }
+        .menu-bar a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .menu-bar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Menu Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/images/log2.png" alt="Logo" width="50" height="45" class="me-2">
+                <span><b>E-Penjualan</b></span>
+            </a>
+
+            <!-- Toggle Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="kasir.html">
+                            <i class="mdi mdi-cash-register"></i> Kasir
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="data_transaksi.html">
+                            <i class="mdi mdi-folder-open"></i> Daftar Transaksi 
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="sinkronisasiData()">
+                            <i class="mdi mdi-cloud-upload"></i> Sinkronisasi
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="logout()">
+                            <i class="mdi mdi-logout"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        <!-- ============================================================== -->
+        <!-- End Topbar Header -->
+        <!-- ============================================================== -->
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Form untuk Mengisi Data Pembelian -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-primary ">
+                        <h5 class="mb-0 text-white">Form Pembelian Hewan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="kasirForm">
+                            <div class="mb-3">
+                                <label for="tanggal" class="form-label">Tanggal</label>
+                                <input type="date" class="form-control" id="tanggal">
+                            </div>
+                            <div class="form-group">
+                                <label for="kodeproduk">Kode Produk</label>
+                                <input id="kodeproduk" class="form-control" name="kodeproduk" list="kodeprodukList" placeholder="Ketik atau pilih kode produk" required>
+                                <datalist id="kodeprodukList">
+                                    <!-- Opsi akan diisi secara dinamis -->
+                                </datalist>
+                            </div>
+                            <div class="mb-3">
+                                <label for="namaPembeli" class="form-label">Nama Pembeli</label>
+                                <input type="text" class="form-control" id="namaPembeli" placeholder="Masukkan nama pembeli">
+                            </div>
+                            <div class="mb-3">
+                                <label for="kontakPembeli" class="form-label">Kontak Pembeli</label>
+                                <input type="text" class="form-control" id="kontakPembeli" placeholder="Masukkan kontak pembeli">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12">Jenis Hewan</label>
+                                <div class="col-sm-12">
+                                    <select class="form-select shadow-none form-control-line" id="jenis" name="jenis" required>
+                                        <option selected>Pilih Jenis</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ras">Ras</label>
+                                <select id="ras" class="form-select" name="ras" required>
+                                    <option value="" disabled selected>Pilih Ras</option>
+                                    <!-- Opsi akan diisi secara dinamis -->
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="satuan" class="form-label">Satuan</label>
+                                <select class="form-select" id="satuan">
+                                    <option>Pilih Satuan</option>
+                                    <option value="Ekor">Ekor</option>
+                                    <option value="Kg">Kg</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 " >
+                                <label for="hargahewan" class="form-label">Harga Hewan</label>
+                                <input type="text" class="form-control" id="hargahewan" placeholder="isi dengan harga" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" placeholder="Masukkan jumlah">
+                            </div>
+                            <div class="mb-3">
+                                <label for="metodePembayaran" class="form-label">Metode Pembayaran</label>
+                                <select class="form-select" id="metodePembayaran">
+                                    <option value="Tunai">Tunai</option>
+                                    <option value="Transfer">Transfer</option>
+                                    <option value="Kredit">Kredit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="norekContainer" style="display: none;">
+                                <label for="norek" class="form-label">Nomor Rekening</label>
+                                <input type="text" class="form-control" id="norek" placeholder="Masukkan nomor rekening">
+                            </div>
+                            <div class="mb-3" id="atascontainer" style="display: none;">
+                                <label for="atasnama" class="form-label">Atas Nama</label>
+                                <input type="text" class="form-control" id="atasnama">
+                            </div>
+                            <div class="mb-3">
+                                <label for="namaPenjual" class="form-label">Nama Penjual</label>
+                                <input type="text" class="form-control" id="namaPenjual" placeholder="Masukkan nama penjual">
+                            </div>
+                            <div class="mb-3 hide">
+                                <label for="idTransaksi" class="form-label">ID Transaksi</label>
+                                <input type="text" class="form-control" id="idTransaksi" readonly>
+                            </div>
+                            <button type="button" class="btn btn-primary w-100" onclick="tambahNota()">Tambah ke Nota</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nota -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-secondary ">
+                        <h5 class="mb-0 text-white">Nota Pembayaran</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Header Nota -->
+                        <div class="text-center mb-4">
+                            <img src="assets/images/log2.png" alt="Logo Perusahaan" width="85" height="70" class="mb-2">
+                            <h4 class="fw-bold">E - Penjualan</h4>
+                            <p class="text-muted">Nota Pembelian Hewan</p>
+                        </div>
+
+                        <!-- Informasi Nota -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between">
+                                    <p><strong>Nama Pembeli</strong></p>
+                                    <p id="notaNamaPembeli">-</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p><strong>Tanggal</strong></p>
+                                    <p id="notaTanggal">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between">
+                                    <p><strong>Metode Pembayaran</strong></p>
+                                    <p id="notaMetodePembayaran">-</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p><strong>Nama Penjual</strong></p>
+                                    <p id="notaNamaPenjual">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Nota -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID Transaksi</th>
+                                        <th>Kode Produk</th>
+                                        <th>Jenis Hewan</th>
+                                        <th>Ras/Sub Hewan</th>
+                                        <th>Quantity</th>
+                                        <th>Satuan</th>
+                                        <th>Total</th>
+                                        <th>Action</th> <!-- Kolom Action -->
+                                    </tr>
+                                </thead>
+                                <tbody id="notaTableBody">
+                                    <!-- Data nota akan ditambahkan di sini -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Total Bayar -->
+                        <div class="text-end mt-3">
+                            <h5>Total Bayar: <span id="totalBayar">0</span></h5>
+                            <!-- <button type="button" class="btn btn-secondary mt-2" onclick="printNota()">Print PDF</button> -->
+                            <button type="button" class="btn btn-secondary mt-2" onclick="cetakStruk()">Cetak Struk</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app-style-switcher.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="js/pages/dashboards/dashboard1.js"></script>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <script>
+        // URL Web App dari Apps Script
+        const urlras = 'https://script.google.com/macros/s/AKfycbw23o6_vQuQRVOsSvxjoDtFCc6794pRe3Vv5lTsoH5rY_bK2eRcfnek7a7IztEvAoE/exec'; // Ganti dengan URL Web App Anda
+    
+        // Ambil data dari Apps Script dan tambahkan ke dropdown
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.getElementById('ras');
+    
+            fetch(urlras)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.id_ras; // ID dari spreadsheet
+                        option.textContent = item.ras; // Nama dari spreadsheet
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
+    
+    
+<script>
+    let produkData = []; // Array untuk menyimpan data kode produk dan harga
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const datalist = document.getElementById('kodeprodukList');
+
+        fetch('https://script.google.com/macros/s/AKfycbzSXe8yrX8fDcrgAFmKmg9PGliaIHf49KXGhZgGjKpaebRVZ402xctBZQeHNJr5y5Gm/exec') // Ganti dengan URL Web App Anda
+            .then(response => response.json())
+            .then(data => {
+                produkData = data; // Simpan data ke array produkData
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.kode; // Nama dari spreadsheet
+                    datalist.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+   
+</script>
+
+    <script>
+        // URL Web App dari Apps Script
+        const url = 'https://script.google.com/macros/s/AKfycbxmcvBzYsYNZKN3bUSJwspob--hCpvMDtkL72UO2ch7fLSPYztuyzjharEuuDpYcT0s/exec'; // Ganti dengan URL Web App Anda
+    
+        // Ambil data dari Apps Script dan tambahkan ke dropdown
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.getElementById('ras');
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.ras; // ID dari spreadsheet
+                        option.textContent = item.ras; // Nama dari spreadsheet
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
+
+    <script>
+        // URL Web App dari Apps Script
+        const url2 = 'https://script.google.com/macros/s/AKfycbxmcvBzYsYNZKN3bUSJwspob--hCpvMDtkL72UO2ch7fLSPYztuyzjharEuuDpYcT0s/exec'; // Ganti dengan URL Web App Anda
+    
+        // Ambil data dari Apps Script dan tambahkan ke dropdown
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.getElementById('jenis');
+    
+            fetch(url2)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.jenis; // ID dari spreadsheet
+                        option.textContent = item.jenis; // Nama dari spreadsheet
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
+
+
+<script>
+  const apiEndpoint = 'https://script.google.com/macros/s/AKfycbz9FrtqjiUbUsNg0qvz2D5LmOlDnVyZoGW-Cn4aTPsE5xGhbEdvgORkV779q-_CFVmsTA/exec';
+const dataTableBody = document.querySelector('#data-table tbody');
+
+document.addEventListener('DOMContentLoaded', loadData);
+
+function loadData() {
+    const selectedClass = localStorage.getItem('selectedClass') || '';
+
+    if (!selectedClass) {
+        console.error('No class selected!');
+        return;
+    }
+
+    dataTableBody.innerHTML = ''; // Clear the table body
+
+    fetch(`${apiEndpoint}?action=read&jurusan=${encodeURIComponent(selectedClass)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn('No data available');
+                return;
+            }
+
+            data.forEach(stat => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="text-center">${stat.namaKelas}</td>
+                    <td  class="text-center">${stat.totalFemale}</td>
+                    <td  class="text-center">${stat.totalMale}</td>
+                    <td  class="text-center">${stat.totalAll}</td>
+                `;
+                dataTableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading data!', error);
+        });
+}
+</script>
+<script>
+    function logout() {
+        // Clear the history from local storage
+        localStorage.removeItem('selectedRole');
+
+        // Redirect to index.html
+        window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
+    }
+</script>
+    <script>
+        let totalBayar = 0;
+
+        function generateTransactionId() {
+            const date = new Date();
+            const timestamp = date.getTime(); // Waktu dalam milidetik
+            const randomNum = Math.floor(Math.random() * 1000); // Angka acak 3 digit
+            return `TRX-${timestamp}-${randomNum}`;
+        }
+
+        function tambahNota() {
+            const tanggal = document.getElementById('tanggal').value;
+            const kodeProduk = document.getElementById('kodeproduk').value;
+            const namaPembeli = document.getElementById('namaPembeli').value;
+            const kontakPembeli = document.getElementById('kontakPembeli').value;
+            const jenisHewan = document.getElementById('jenis').value;
+            const rasHewan = document.getElementById('ras').value;
+            const satuan = document.getElementById('satuan').value;
+            const hargahewan = parseFloat(document.getElementById('hargahewan').value);
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const metodePembayaran = document.getElementById('metodePembayaran').value;
+            const namaPenjual = document.getElementById('namaPenjual').value;
+
+            // Ambil nilai norek dan atasnama hanya jika metode pembayaran adalah Transfer atau Debit
+            const norek = (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') 
+                ? document.getElementById('norek').value 
+                : null;
+            const atasnama = (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') 
+                ? document.getElementById('atasnama').value 
+                : null;
+
+            // Validasi input
+            if (!tanggal || !kodeProduk || !namaPembeli || !kontakPembeli || !jenisHewan || !rasHewan || !satuan || isNaN(hargahewan) || isNaN(quantity) || !metodePembayaran || !namaPenjual) {
+                alert('Harap isi semua data dengan benar!');
+                return;
+            }
+
+            // Validasi tambahan untuk norek dan atasnama jika metode pembayaran adalah Transfer atau Debit
+            if ((metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') && (!norek || !atasnama)) {
+                alert('Harap isi Nomor Rekening dan Atas Nama untuk metode pembayaran Transfer atau Debit!');
+                return;
+            }
+
+            // Hitung total
+            const total = hargahewan * quantity;
+
+            // Simpan data ke localStorage
+            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+            notaData.push({
+                idTransaksi: generateTransactionId(),
+                tanggal,
+                kodeProduk,
+                namaPembeli,
+                kontakPembeli,
+                jenisHewan,
+                rasHewan,
+                satuan,
+                hargahewan,
+                quantity,
+                total,
+                metodePembayaran,
+                norek,
+                atasnama,
+                namaPenjual
+            });
+            localStorage.setItem('notaData', JSON.stringify(notaData));
+
+            // Perbarui tampilan nota
+            loadNota();
+
+            // Reset form setelah data ditambahkan
+            document.getElementById('kasirForm').reset();
+            alert('Data berhasil ditambahkan ke Nota!');
+        }
+
+        function printNota() {
+            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+            if (notaData.length === 0) {
+                alert('Tidak ada data untuk dicetak!');
+                return;
+            }
+
+            let printContent = `
+                <div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">
+                    <h2 style="margin: 0;">Management Kandang</h2>
+                    <p style="margin: 0;">Jl. Contoh Alamat No. 123, Kota Contoh</p>
+                    <p style="margin: 0;">Telp: 0812-3456-7890</p>
+                    <hr style="border: 1px dashed #000;">
+                </div>
+                <div style="font-family: Arial, sans-serif; font-size: 14px;">
+                    <p><strong>Nama Pembeli:</strong> ${notaData[0].namaPembeli}</p>
+                    <p><strong>Tanggal:</strong> ${notaData[0].tanggal}</p>
+                    <p><strong>Metode Pembayaran:</strong> ${notaData[0].metodePembayaran}</p>
+                    <p><strong>Nama Penjual:</strong> ${notaData[0].namaPenjual}</p>
+                </div>
+                <hr style="border: 1px dashed #000;">
+                <table style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Kode</th>
+                            <th style="text-align: left;">Jenis</th>
+                            <th style="text-align: left;">Ras</th>
+                            <th style="text-align: right;">Qty</th>
+                            <th style="text-align: right;">Harga</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            notaData.forEach(item => {
+                printContent += `
+                    <tr>
+                        <td>${item.kodeProduk}</td>
+                        <td>${item.jenisHewan}</td>
+                        <td>${item.rasHewan}</td>
+                        <td style="text-align: right;">${item.quantity}</td>
+                        <td style="text-align: right;">Rp ${item.harga.toLocaleString()}</td>
+                        <td style="text-align: right;">Rp ${item.total.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            printContent += `
+                    </tbody>
+                </table>
+                <hr style="border: 1px dashed #000;">
+                <div style="text-align: right; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+                    Total Bayar: Rp ${totalBayar.toLocaleString()}
+                </div>
+                <hr style="border: 1px dashed #000;">
+                <div style="text-align: center; font-family: Arial, sans-serif; font-size: 12px; margin-top: 20px;">
+                    <p>Terima kasih atas pembelian Anda!</p>
+                    <p>Barang yang sudah dibeli tidak dapat dikembalikan.</p>
+                </div>
+            `;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Nota Pembelian</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 20px;
+                            }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+                            th, td {
+                                padding: 5px;
+                                text-align: left;
+                            }
+                            th {
+                                background-color: #f4f4f4;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${printContent}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+    <script>
+        document.getElementById('metodePembayaran').addEventListener('change', function () {
+            const metodePembayaran = this.value;
+            const norekContainer = document.getElementById('norekContainer');
+            const atascontainer = document.getElementById('atascontainer');
+
+            if (metodePembayaran === 'Transfer' || metodePembayaran === 'Debit') {
+                norekContainer.style.display = 'block';
+                atascontainer.style.display = 'block';
+            } else {
+                norekContainer.style.display = 'none';
+                atascontainer.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+        function sinkronisasiData() {
+            const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+            if (notaData.length === 0) {
+                alert('Tidak ada data untuk disinkronkan!');
+                return;
+            }
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyabLzAcZuAdM46D2aSdtr_mBry0OxPMiIbTyqu5XJDycSgWFF5nTvTSfuTsEtJPiK8/exec'; // Ganti dengan URL Web App dari Apps Script Anda
+
+            fetch(scriptURL, {
+                mode: 'no-cors',
+                method: 'POST',
+                body: JSON.stringify(notaData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+                    // Hapus data dari localStorage setelah sinkronisasi berhasil
+                    localStorage.removeItem('notaData');
+                } else {
+                    alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Data berhasil disinkronkan ke Google Spreadsheet!');
+            });
+        }
+    </script>
+    <script>
+document.getElementById('satuan').addEventListener('change', function () {
+    const satuan = this.value; // Ambil nilai satuan yang dipilih
+    const hargahewanInput = document.getElementById('hargahewan');
+    const quantityInput = document.getElementById('quantity');
+
+    if (satuan === 'Ekor') {
+        // Jika satuan adalah Ekor
+        hargahewanInput.placeholder = 'Harga per ekor';
+        hargahewanInput.value = ''; // Kosongkan harga
+        quantityInput.placeholder = 'Jumlah ekor';
+        quantityInput.value = ''; // Kosongkan quantity
+    } else if (satuan === 'Kg') {
+        // Jika satuan adalah Kg
+        hargahewanInput.placeholder = 'Harga per kg';
+        hargahewanInput.value = ''; // Kosongkan harga
+        quantityInput.placeholder = 'Jumlah kg';
+        quantityInput.value = ''; // Kosongkan quantity
+    }
+});
+</script>
+    <script>
+function loadNota() {
+    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+    const notaTableBody = document.getElementById('notaTableBody');
+    notaTableBody.innerHTML = ''; // Kosongkan tabel sebelum memuat data
+
+    if (notaData.length > 0) {
+        // Perbarui Informasi Nota
+        document.getElementById('notaNamaPembeli').textContent = notaData[0].namaPembeli;
+        document.getElementById('notaTanggal').textContent = notaData[0].tanggal;
+        document.getElementById('notaMetodePembayaran').textContent = notaData[0].metodePembayaran;
+        document.getElementById('notaNamaPenjual').textContent = notaData[0].namaPenjual;
+    } else {
+        // Reset Informasi Nota jika tidak ada data
+        document.getElementById('notaNamaPembeli').textContent = '-';
+        document.getElementById('notaTanggal').textContent = '-';
+        document.getElementById('notaMetodePembayaran').textContent = '-';
+        document.getElementById('notaNamaPenjual').textContent = '-';
+    }
+
+    notaData.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.idTransaksi}</td>
+            <td>${item.kodeProduk}</td>
+            <td>${item.jenisHewan}</td>
+            <td>${item.rasHewan}</td>
+            <td>${item.quantity}</td>
+            <td>${item.satuan}</td>
+            <td>Rp ${item.total.toLocaleString()}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="hapusNota(${index})">Hapus</button>
+            </td>
+        `;
+        notaTableBody.appendChild(row);
+    });
+
+    // Perbarui total bayar
+    totalBayar = notaData.reduce((sum, item) => sum + item.total, 0);
+    document.getElementById('totalBayar').textContent = `Rp ${totalBayar.toLocaleString()}`;
+}
+</script>
+   
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadNota(); // Muat data nota dari localStorage
+    });
+</script>
+<script>
+function hapusNota(index) {
+    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+    if (index >= 0 && index < notaData.length) {
+        // Hapus data berdasarkan index
+        notaData.splice(index, 1);
+        localStorage.setItem('notaData', JSON.stringify(notaData)); // Perbarui localStorage
+        loadNota(); // Perbarui tampilan tabel
+    }
+}
+</script>
+
+<script>
+function cetakStruk() {
+    const notaData = JSON.parse(localStorage.getItem('notaData')) || [];
+    if (notaData.length === 0) {
+        alert('Tidak ada data untuk dicetak!');
+        return;
+    }
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxg9R8T0hmqpnY-Ts6QeDz4cQKUab-wVqOQ53898wSGG-YCuSr6lktgoBQtBb704bFN/exec'; // URL Web App
+
+    fetch(scriptURL, {
+        mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify(notaData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(() => {
+        alert('Data berhasil disimpan ke Google Spreadsheet!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat menyimpan data!');
+    })
+    .finally(() => {
+        printStruk(notaData); // Cetak nota
+
+        localStorage.removeItem('notaData'); // Hapus data lokal
+        loadNota(); // Reset tabel
+    });
+}
+
+
+// Fungsi untuk mencetak struk
+function printStruk(notaData) {
+    let totalBayar = notaData.reduce((sum, item) => sum + item.total, 0);
+
+    let printContent = `
+        <div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Management Kandang</h2>
+            <p style="margin: 0;">Jl. Contoh Alamat No. 123, Kota Contoh</p>
+            <p style="margin: 0;">Telp: 0812-3456-7890</p>
+            <hr style="border: 1px dashed #000;">
+        </div>
+        <div style="font-family: Arial, sans-serif; font-size: 14px;">
+            <p><strong>Nama Pembeli:</strong> ${notaData[0].namaPembeli}</p>
+            <p><strong>Tanggal:</strong> ${notaData[0].tanggal}</p>
+            <p><strong>Metode Pembayaran:</strong> ${notaData[0].metodePembayaran}</p>
+            <p><strong>Nama Penjual:</strong> ${notaData[0].namaPenjual}</p>
+        </div>
+        <hr style="border: 1px dashed #000;">
+        <table style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Kode</th>
+                    <th style="text-align: left;">Jenis</th>
+                    <th style="text-align: left;">Ras</th>
+                    <th style="text-align: right;">Qty</th>
+                    <th style="text-align: right;">Harga</th>
+                    <th style="text-align: right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    notaData.forEach(item => {
+        printContent += `
+            <tr>
+                <td>${item.kodeProduk}</td>
+                <td>${item.jenisHewan}</td>
+                <td>${item.rasHewan}</td>
+                <td style="text-align: right;">${item.quantity}</td>
+                <td style="text-align: right;">Rp ${item.hargahewan.toLocaleString()}</td>
+                <td style="text-align: right;">Rp ${item.total.toLocaleString()}</td>
+            </tr>
+    `;
+    });
+
+    printContent += `
+            </tbody>
+        </table>
+        <hr style="border: 1px dashed #000;">
+        <div style="text-align: right; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+            Total Bayar: Rp ${totalBayar.toLocaleString()}
+        </div>
+        <hr style="border: 1px dashed #000;">
+        <div style="text-align: center; font-family: Arial, sans-serif; font-size: 12px; margin-top: 20px;">
+            <p>Terima kasih atas pembelian Anda!</p>
+            <p>Barang yang sudah dibeli tidak dapat dikembalikan.</p>
+        </div>
+    `;
+
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Nota Pembelian</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 20px;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 5px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: #f4f4f4;
+                    }
+                </style>
+            </head>
+            <body>
+                ${printContent}
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+}
+</script>
+<script>
+    // Periksa apakah "selectedRole" ada di localStorage dan apakah nilainya adalah "kasir"
+    const selectedRole = localStorage.getItem('selectedRole');
+    if (selectedRole !== 'kasir') {
+        // Jika tidak ada atau nilainya bukan "kasir", arahkan ke halaman login
+        window.location.href = 'index.html'; // Ganti 'index.html' dengan halaman login Anda
+    }
+</script>
+</body>
+</html>

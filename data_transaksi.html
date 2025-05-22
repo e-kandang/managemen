@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin">
+    <meta name="description" content="Flexy Admin Lite is powerful and clean admin dashboard template.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Data Transaksi</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/log2.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    
+    <!-- Menu Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/images/log2.png" alt="Logo" width="50" height="45" class="me-2">
+                <span><b>E-Penjualan</b></span>
+            </a>
+
+            <!-- Toggle Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link " href="kasir.html">
+                            <i class="mdi mdi-cash-register"></i> Kasir
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="data_transaksi.html">
+                            <i class="mdi mdi-folder-open"></i> Daftar Transaksi 
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="sinkronisasiData()">
+                            <i class="mdi mdi-cloud-upload"></i> Sinkronisasi
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="logout()">
+                            <i class="mdi mdi-logout"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        <!-- ============================================================== -->
+        <!-- End Topbar Header -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Page Wrapper -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row align-items-center d-flex justify-content-between">
+                    <div class="col-6">
+                        <h1 class="mb-0 fw-bold">Data Transaksi</h1>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-success" onclick="exportToExcel()">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- ============================================================== -->
+            <!-- Container Fluid -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div id="successAlert" class="alert alert-success d-none"></div>
+                <div id="errorAlert" class="alert alert-danger d-none"></div>
+
+                <!-- Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <section class="section">
+                            <div class="card">
+                                <div class="card-body">
+                                    
+                                    <!-- <div class="d-flex justify-content-between mb-3">
+                                        <a class="mb-0">Data Casis</a>
+                                         <input type="text" id="search-input" placeholder="Cari data..." class="form-control w-25" onkeyup="searchTable()"> 
+                                    </div> -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="table1">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Transaksi</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Kode Produk</th>
+                                                    <th>Nama Pembeli</th>
+                                                    <th>Kontak Pembeli</th>
+                                                    <th>Jenis Hewan</th>
+                                                    <th>Ras Hewan</th>
+                                                    <th>Satuan</th>
+                                                    <th>Quantity</th>
+                                                    <th>Harga Hewan</th>
+                                                    <th>Metode Pembayaran</th>
+                                                    <th>Nama Penjual</th>
+                                                    <th>No. Rekening</th>
+                                                    <th>Atas Nama</th>
+                                                    <th>Total</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="table-body">
+                                                <!-- Data akan dimasukkan di sini -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </div>
+            <!-- ============================================================== -->
+            <!-- End Container Fluid -->
+            <!-- ============================================================== -->
+
+            <!-- Footer -->
+            <footer class="footer text-center">
+                Management Kandang Designed and Developed by <a href="https://jeriwilaga.github.io/Portofolio/">AgaDevelopment</a>.
+            </footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Wrapper -->
+        <!-- ============================================================== -->
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Scripts -->
+    <!-- ============================================================== -->
+  
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzKXfKv2q2DbmYlw-Y00VYl1NdYqAtNwzuf5TggPmRQVEf1vRlbnBzhIklgl-b3eDTO/exec'; // Ganti dengan URL Google Apps Script Anda
+        const tableBody = document.querySelector('#table-body');
+    
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(data => {
+                if (!data || data.length === 0) {
+                    console.log('No data found.');
+                    return;
+                }
+    
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.idTransaksi || 'N/A'}</td>
+                        <td>${row.tanggal ? new Date(row.tanggal).toLocaleDateString('id-ID') : 'N/A'}</td>
+                        <td>${row.kodeProduk || 'N/A'}</td>
+                        <td>${row.namaPembeli || 'N/A'}</td>
+                        <td>${row.kontakPembeli || 'N/A'}</td>
+                        <td>${row.jenisHewan || 'N/A'}</td>
+                        <td>${row.rasHewan || 'N/A'}</td>
+                        <td>${row.satuan || 'N/A'}</td>
+                        <td>${row.quantity || 'N/A'}</td>
+                        <td>Rp ${row.hargahewan ? parseFloat(row.hargahewan).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}</td>
+                        <td>${row.metodePembayaran || 'N/A'}</td>
+                        <td>${row.namaPenjual || 'N/A'}</td>
+                        <td>${row.norek || 'N/A'}</td>
+                        <td>${row.atasnama || 'N/A'}</td>
+                        <td>Rp ${row.total ? parseFloat(row.total).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}</td>
+                        <td>
+                            <i class="fa fa-print m-1 text-primary" onclick="printNota('${row.idTransaksi}')"></i>
+                            <i class="fa fa-trash m-1 text-danger" onclick="deleteEntry('${row.idTransaksi}')"></i>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+    
+    
+                // Inisialisasi Simple DataTable setelah data ditambahkan
+                new simpleDatatables.DataTable(document.querySelector('#table1'));
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+    
+</script>
+    <script>
+        function searchTable() {
+            // Mendapatkan nilai input pencarian
+            const input = document.getElementById('search-input');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('table1');
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rows = tbody.getElementsByTagName('tr');
+
+            // Loop melalui semua baris tabel dan sembunyikan yang tidak cocok
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let found = false;
+
+                // Loop melalui semua sel dalam baris
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        const cellValue = cells[j].textContent || cells[j].innerText;
+                        if (cellValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Tampilkan atau sembunyikan baris berdasarkan pencarian
+                rows[i].style.display = found ? "" : "none";
+            }
+        }
+    </script>
+
+    <script>
+        function deleteEntry(idTransaksi) {
+            // Konfirmasi sebelum menghapus data
+            const confirmation = confirm("Apakah Anda yakin ingin menghapus data ini?");
+            if (!confirmation) {
+                return; // Batalkan jika pengguna menekan 'No'
+            }
+        
+            const url = 'https://script.google.com/macros/s/AKfycbxEeiUDWMaNPL9jaL1zf2yWUXj_CiBknmbG4pCVRbaLfadiKF0jmaDLFCrrCnxMX08A/exec'; // Ganti dengan URL Google Apps Script Anda
+            const params = {
+                func: 'DELETE',
+                idTransaksi: idTransaksi, // Sinkron dengan parameter backend
+                SH: 'Transaksi' // Nama sheet yang sesuai
+            };
+        
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors', // Menghindari masalah CORS
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(params)
+            })
+            .then(() => {
+                alert("Berhasil: Data berhasil dihapus.");
+                location.reload(); // Refresh halaman setelah penghapusan
+            })
+            .catch(error => {
+                console.error('Error deleting entry:', error);
+                alert('Terjadi kesalahan saat mencoba menghapus data.');
+            });
+        }
+        
+    </script>
+
+<script>
+    let currentPage = 1;
+const rowsPerPage = 10;
+
+function displayTable() {
+    let tableBody = document.getElementById("table-body");
+    let rows = tableBody.getElementsByTagName("tr");
+    let totalPages = Math.ceil(rows.length / rowsPerPage) || 1;
+    
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = (i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage) ? "" : "none";
+    }
+
+    updatePaginationControls(totalPages);
+}
+
+function updatePaginationControls(totalPages) {
+    let paginationControls = document.getElementById("pagination");
+    paginationControls.innerHTML = "";
+
+    let prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.classList.add("btn", "btn-secondary", "mx-1");
+    prevButton.disabled = currentPage === 1;
+    prevButton.onclick = function () {
+        if (currentPage > 1) {
+            currentPage--;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+        let button = document.createElement("button");
+        button.textContent = i;
+        button.classList.add("btn", "btn-primary", "mx-1");
+        if (i === currentPage) button.classList.add("active");
+        button.onclick = function () {
+            currentPage = i;
+            displayTable();
+        };
+        paginationControls.appendChild(button);
+    }
+
+    let nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.classList.add("btn", "btn-secondary", "mx-1");
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.onclick = function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayTable();
+        }
+    };
+    paginationControls.appendChild(nextButton);
+}
+
+// Panggil fungsi saat data di-load
+document.addEventListener("DOMContentLoaded", function () {
+    displayTable();
+});
+
+</script>
+    <!-- Simple DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+<!-- Simple DataTables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+    function exportToExcel() {
+        const table = document.getElementById('table1'); // Ambil elemen tabel
+        if (!table) {
+            alert("Tabel tidak ditemukan!");
+            return;
+        }
+    
+        const workbook = XLSX.utils.book_new(); // Buat workbook baru
+    
+        // Ambil data dari tabel dan konversi ke worksheet
+        const sheetData = [
+            Array.from(table.querySelectorAll('thead th')).map(th => th.innerText), // Header tabel
+            ...Array.from(table.querySelectorAll('tbody tr')).map(row =>
+                Array.from(row.querySelectorAll('td')).map(cell => cell.innerText)
+            ) // Data tabel
+        ];
+    
+        // Hitung total dari kolom "Total" (kolom ke-15, indeks 14)
+        let totalSum = 0;
+        Array.from(table.querySelectorAll('tbody tr')).forEach(row => {
+            const totalCell = row.querySelectorAll('td')[14]; // Kolom ke-15
+            if (totalCell) {
+                const totalValue = parseFloat(totalCell.innerText.replace('Rp ', '').replace(/\./g, '').replace(',', '.'));
+                if (!isNaN(totalValue)) {
+                    totalSum += totalValue;
+                }
+            }
+        });
+    
+        // Tambahkan baris total di bagian bawah tabel
+        const totalRow = Array(sheetData[0].length).fill(''); // Buat baris kosong dengan panjang sesuai header
+        totalRow[13] = 'Grand Total'; // Kolom ke-14 (Atas Nama)
+        totalRow[14] = `Rp ${totalSum.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; // Kolom ke-15 (Total)
+        sheetData.push(totalRow);
+    
+        // Konversi data ke worksheet
+        const worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+    
+        // Tambahkan border ke setiap sel
+        const range = XLSX.utils.decode_range(worksheet['!ref']);
+        for (let row = range.s.r; row <= range.e.r; row++) {
+            for (let col = range.s.c; col <= range.e.c; col++) {
+                const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                if (!worksheet[cellAddress]) continue; // Lewati jika sel kosong
+                if (!worksheet[cellAddress].s) worksheet[cellAddress].s = {}; // Tambahkan properti style jika belum ada
+                worksheet[cellAddress].s.border = {
+                    top: { style: "thin", color: { rgb: "000000" } },
+                    bottom: { style: "thin", color: { rgb: "000000" } },
+                    left: { style: "thin", color: { rgb: "000000" } },
+                    right: { style: "thin", color: { rgb: "000000" } }
+                };
+            }
+        }
+    
+        // Tambahkan worksheet ke workbook
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Data Transaksi");
+    
+        // Dapatkan tanggal saat ini
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+    
+        // Simpan file Excel dengan nama yang mencakup tanggal
+        const fileName = `Data_Transaksi_${formattedDate}.xlsx`;
+        XLSX.writeFile(workbook, fileName);
+    }
+</script>
+
+<script>
+function printNota(idTransaksi) {
+  // Cari semua baris tabel dengan ID Transaksi yang sama
+  const table = document.getElementById('table1');
+  const rows = table.getElementsByTagName('tr');
+  const notaDataList = [];
+
+  for (let i = 1; i < rows.length; i++) { // Mulai dari 1 untuk melewati header
+      const cells = rows[i].getElementsByTagName('td');
+      if (cells[0].innerText === idTransaksi) { // Kolom pertama adalah idTransaksi
+          const notaData = {
+              idTransaksi: cells[0].innerText,
+              tanggal: cells[1].innerText,
+              kodeProduk: cells[2].innerText,
+              namaPembeli: cells[3].innerText,
+              kontakPembeli: cells[4].innerText,
+              jenisHewan: cells[5].innerText,
+              rasHewan: cells[6].innerText,
+              satuan: cells[7].innerText,
+              quantity: parseInt(cells[8].innerText), // Konversi ke angka
+              harga: parseFloat(cells[9].innerText.replace('Rp ', '').replace(/\./g, '').replace(',', '.')), // Konversi ke angka
+              metodePembayaran: cells[10].innerText,
+              namaPenjual: cells[11].innerText,
+              norek: cells[12].innerText,
+              atasnama: cells[13].innerText,
+              total: parseFloat(cells[14].innerText.replace('Rp ', '').replace(/\./g, '').replace(',', '.')) // Konversi ke angka
+          };
+          notaDataList.push(notaData);
+      }
+  }
+
+  if (notaDataList.length === 0) {
+      alert('Data untuk ID Transaksi ini tidak ditemukan!');
+      return;
+  }
+
+  // Buat konten untuk dicetak
+  let printContent = `
+      <div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">
+          <h2 style="margin: 0;">Management Kandang</h2>
+          <p style="margin: 0;">Jl. Contoh Alamat No. 123, Kota Contoh</p>
+          <p style="margin: 0;">Telp: 0812-3456-7890</p>
+          <hr style="border: 1px dashed #000;">
+      </div>
+      <div style="font-family: Arial, sans-serif; font-size: 14px;">
+          <p><strong>ID Transaksi:</strong> ${notaDataList[0].idTransaksi}</p>
+          <p><strong>Nama Pembeli:</strong> ${notaDataList[0].namaPembeli}</p>
+          <p><strong>Tanggal:</strong> ${notaDataList[0].tanggal}</p>
+          <p><strong>Metode Pembayaran:</strong> ${notaDataList[0].metodePembayaran}</p>
+          <p><strong>Nama Penjual:</strong> ${notaDataList[0].namaPenjual}</p>
+      </div>
+      <hr style="border: 1px dashed #000;">
+      <table style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; border-collapse: collapse;">
+          <thead>
+              <tr>
+                  <th style="text-align: left;">Kode</th>
+                  <th style="text-align: left;">Jenis</th>
+                  <th style="text-align: left;">Ras</th>
+                  <th style="text-align: right;">Qty</th>
+                  <th style="text-align: right;">Harga</th>
+                  <th style="text-align: right;">Total</th>
+              </tr>
+          </thead>
+          <tbody>
+  `;
+
+  // Tambahkan semua data dengan ID Transaksi yang sama ke tabel
+  let grandTotal = 0;
+  notaDataList.forEach(notaData => {
+      printContent += `
+          <tr>
+              <td>${notaData.kodeProduk}</td>
+              <td>${notaData.jenisHewan}</td>
+              <td>${notaData.rasHewan}</td>
+              <td style="text-align: right;">${notaData.quantity}</td>
+              <td style="text-align: right;">Rp ${notaData.harga.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td style="text-align: right;">Rp ${notaData.total.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          </tr>
+      `;
+      grandTotal += notaData.total;
+  });
+
+  printContent += `
+          </tbody>
+      </table>
+      <hr style="border: 1px dashed #000;">
+      <div style="text-align: right; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+          Total Bayar: Rp ${grandTotal.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </div>
+      <hr style="border: 1px dashed #000;">
+      <div style="text-align: center; font-family: Arial, sans-serif; font-size: 12px; margin-top: 20px;">
+          <p>Terima kasih atas pembelian Anda!</p>
+          <p>Barang yang sudah dibeli tidak dapat dikembalikan.</p>
+      </div>
+  `;
+
+  // Buka jendela baru untuk mencetak
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(`
+      <html>
+          <head>
+              <title>Nota Pembelian</title>
+              <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      margin: 20px;
+                  }
+                  table {
+                      width: 100%;
+                      border-collapse: collapse;
+                  }
+                  th, td {
+                      padding: 5px;
+                      text-align: left;
+                      border: 1px solid #ddd;
+                  }
+                  th {
+                      background-color: #f4f4f4;
+                  }
+              </style>
+          </head>
+          <body>
+              ${printContent}
+          </body>
+      </html>
+  `);
+  printWindow.document.close();
+  printWindow.print();
+}
+</script>
+<script>
+    function logout() {
+        // Clear the history from local storage
+        localStorage.removeItem('selectedRole');
+
+        // Redirect to index.html
+        window.location.href = 'login.html'; // Change 'index.html' to your actual homepage if different
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SmartAxioo || Halaman Login</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/SMART.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+    
+            .container {
+                height: 100%;
+                align-items: center; /* Center vertically */
+                justify-content: center; /* Center horizontally */
+            }
+            .password-wrapper {
+                position: relative;
+            }
+            .toggle-password {
+                position: absolute;
+                top: 75%;
+                right: 10px;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+            .card {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+                border: none; /* Hapus border agar lebih terlihat bersih */
+            }
+            .whatsapp-button {
+                position: fixed;
+                bottom: 20px; /* Distance from the bottom */
+                right: 20px;  /* Distance from the right */
+                background-color: #25D366; /* WhatsApp green */
+                color: white;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                font-size: 24px;
+                text-decoration: none;
+            }
+    
+    
+            .whatsapp-button:hover {
+                position: fixed;
+                bottom: 20px; /* Distance from the bottom */
+                right: 20px;  /* Distance from the right */
+                background-color: #ffffff; /* WhatsApp green */
+                color: rgb(255, 255, 255);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                font-size: 24px;
+                text-decoration: none;
+            }
+    
+            .whatsapp-button i {
+                margin: 0;
+            }
+    
+            .whatsapp-button:hover {
+                background-color: #128C7E; /* Darker green on hover */
+            }
+            .sr-onl{
+                position: absolute;
+    
+                color: black;
+            }
+        </style>
+</head>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 sm:p-8 px-4 rounded-lg shadow-lg w-full max-w-md">
+        <div class="flex items-center justify-center mb-6">
+            <img src="assets/images/smart.png" width="40" height="40" class="mr-2"/>
+            <span class="text-2xl font-semibold"><strong>E</strong> KANDANG</span>
+        </div>
+        <p class="text-center text-gray-500 mb-6">Aplikasi Management Kandang</p>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label class="block text-gray-700" for="email">Email</label>
+                <input type="email" id="username" name="username" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700" for="password">Password</label>
+                <input type="password" id="password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+               
+            </div>
+            <button type="submit"  id="loginButton" class="w-full bg-blue-500 text-white py html-2 rounded-lg hover:bg-blue-600 p-2">Login</button>
+            <span id="spinner" class="spinner-border spinner-border-sm ml-2" role="status" style="display: none; text-align: center;">
+                <span class="sr-only">Loading...</span>
+            </span>
+        </form>
+        <p class="text-center text-gray-500 mt-6">
+            Ada Masalah? 
+            <a href="https://wa.me/6282289635649" class="text-blue-500">Kontak Trainer</a>
+        </p>
+        <p id="response" class="mt-3 text-center"></p>
+    </div>
+    <!-- Bootstrap JS dan dependensi -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const passwordIcon = document.querySelector('.toggle-password');
+            const passwordFieldType = passwordField.getAttribute('type');
+            if (passwordFieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.setAttribute('type', 'password');
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Cek apakah username ada di localStorage
+        if (localStorage.getItem('role')) {
+            // Arahkan langsung ke halaman dashboard
+            var role = localStorage.getItem('role'); // Ambil peran pengguna dari localStorage
+            if (role === 'admin') {
+                window.location.href = 'login.html';
+            } else if (role === 'karyawan') {
+                window.location.href = 'login.html';
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    // Show spinner and hide login button
+    document.getElementById('spinner').style.display = 'inline-block';
+    document.getElementById('loginButton').style.display = 'none';
+
+    // Ambil tanggal saat ini
+    var currentDate = new Date().toISOString().split('T')[0];
+
+    // Periksa apakah username ada dalam riwayat login
+    fetch('https://script.google.com/macros/s/AKfycbwbEL9Lb0YwFT1FFRaRw7QMsBxLxbmCCm8o00VEO77mYs2EEAceomTRcKQTECnvNHMj/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+            action: 'checkHistory',
+            username: username
+        }),
+    })
+    .then(response => response.json())
+    .then(historyData => {
+        if (historyData.exists) {
+            // Hide spinner and show login button
+            document.getElementById('spinner').style.display = 'none';
+            document.getElementById('loginButton').style.display = 'block';
+
+            // Arahkan berdasarkan peran pengguna
+            window.location.href = historyData.role === 'admin' ? 'login.html' : 'login.html';
+        } else {
+            // Coba login jika username tidak ada dalam riwayat
+            fetch('https://script.google.com/macros/s/AKfycbwbEL9Lb0YwFT1FFRaRw7QMsBxLxbmCCm8o00VEO77mYs2EEAceomTRcKQTECnvNHMj/exec', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide spinner and show login button
+                document.getElementById('spinner').style.display = 'none';
+                document.getElementById('loginButton').style.display = 'block';
+
+                if (data.success) {
+                    // Log riwayat setelah login berhasil
+                    fetch('https://script.google.com/macros/s/AKfycbwbEL9Lb0YwFT1FFRaRw7QMsBxLxbmCCm8o00VEO77mYs2EEAceomTRcKQTECnvNHMj/exec', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'logHistory',
+                            name: username, // Menganggap username adalah nama pengguna
+                            date: currentDate
+                        }),
+                    })
+                    .then(historyResponse => historyResponse.json())
+                    .then(historyData => {
+                        if (historyData.success) {
+                            // Simpan data di localStorage
+                            
+                            localStorage.setItem('role', data.role); // Simpan peran pengguna di localStorage
+
+                            // Arahkan berdasarkan peran pengguna
+                            window.location.href = data.role === 'admin' ? 'login.html' : 'login.html';
+                        } else {
+                            document.getElementById('response').innerText = 'Pencatatan riwayat gagal: ' + historyData.message;
+                            document.getElementById('response').classList.add('text-danger');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('response').innerText = 'Terjadi kesalahan saat mencatat riwayat.';
+                        document.getElementById('response').classList.add('text-danger');
+                    });
+                } else {
+                    document.getElementById('response').innerText = 'Login gagal: ' + data.message;
+                    document.getElementById('response').classList.add('text-danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').innerText = 'Terjadi kesalahan.';
+                document.getElementById('response').classList.add('text-danger');
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('response').innerText = 'Terjadi kesalahan saat memeriksa riwayat.';
+        document.getElementById('response').classList.add('text-danger');
+
+        // Hide spinner and show login button
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('loginButton').style.display = 'block';
+    });
+});
+
+
+    </script>
+</body>
+</html>
