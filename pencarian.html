@@ -108,7 +108,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="home.html"><img src="assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
+                            <a href="../home.html"><img src="assets/images/manag.png" style="height: 45px;" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -188,9 +188,7 @@
                                 <li class="submenu-item">
                                     <a href="bon.html">Bon</a>
                                 </li>
-                                 <li class="submenu-item">
-                                    <a href="pakan.html">Pakan</a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li class="sidebar-item has-sub">
@@ -396,7 +394,7 @@
                   </div>
                   <div>
                     <p>Conception : ${data.status_reproduksi || 'N/A'}</p>
-                    <p>Birth Date : ${data.tanggal_lahir || 'N/A'}</p>
+                    <p>Birth Date : ${data.tanggal_lahir ? formatDate(data.tanggal_lahir) : 'N/A'}</p>
                     <p>Grade : ${data.hewan_detail?.ras || 'N/A'}</p>
                     <p>Issue Date : ${data.tanggal_terbit || new Date().toISOString().split('T')[0]}</p>
                   </div>
@@ -443,7 +441,19 @@
               </div>
             `;
           }
-          
+
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) {
+                    return 'Invalid Date'; // Jika tanggal tidak valid
+                }
+                return date.toISOString().split('T')[0]; // Format YYYY-MM-DD
+            } catch (error) {
+                console.error('Error formatting date:', error);
+                return 'Invalid Date';
+            }
+        }
 
        function cetakPDF() {
     const { jsPDF } = window.jspdf;
