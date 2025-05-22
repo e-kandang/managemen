@@ -281,6 +281,46 @@
                                     </div>
                                 </div>
 
+                                
+                                <!-- Total Penjualan KM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon blue">
+                                                        <i class="bi bi-cart-check"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Penjualan Kambing per-kg</h6>
+                                                    <h6 class="font-extrabold mb-0 penjualan-km-kg">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Penjualan DM -->
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon green">
+                                                        <i class="bi bi-cart-check"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Penjualan Domba per-kg</h6>
+                                                    <h6 class="font-extrabold mb-0 penjualan-dm-kg">Loading...</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <!-- Transaksi KM -->
                                 <div class="col">
                                     <div class="card">
@@ -364,6 +404,8 @@
                                                                 <th>Total Pengeluaran</th>
                                                                 <th>Total Penjualan Kambing</th>
                                                                 <th>Total Penjualan Domba</th>
+                                                                <th>Penjualan Kambing Per-Kg</th>
+                                                                <th>Penjualan Domba per-kg</th>
                                                                 <th>Transaksi Kambing</th>
                                                                 <th>Transaksi Domba</th>
                                                                 <th>Transaksi All</th>
@@ -375,6 +417,8 @@
                                                                 <td class="td-pengeluaran">Loading...</td>
                                                                 <td class="td-penjualan-km">Loading...</td>
                                                                 <td class="td-penjualan-dm">Loading...</td>
+                                                                <td class="td-penjualan-km-kg">Loading...</td>
+                                                                <td class="td-penjualan-dm-kg">Loading...</td>
                                                                 <td class="td-transaksi-km">Loading...</td>
                                                                 <td class="td-transaksi-dm">Loading...</td>
                                                                 <td class="td-transaksi-all">Loading...</td>
@@ -601,7 +645,7 @@
         }
     </script>
 <script>
-    const scriptURL1 = 'https://script.google.com/macros/s/AKfycbxxeJMTD-VnJ5TPg-pDslriNB8Dc9hQW1bdRGJwG4jJOkvPJXFZbep8hf5b0_lYioM/exec'; // Ganti dengan URL Web App Google Apps Script Anda
+    const scriptURL1 = 'https://script.google.com/macros/s/AKfycby3F6QrcK47JegiVCkdxByoPgTN2FGV-7Kvwmnh1YIzb0Z8I0QGMkRj_dsgMnYE7AG6/exec'; // Ganti dengan URL Web App Google Apps Script Anda
 
     // Fungsi untuk memformat angka ke format Rupiah
     function formatRupiah(angka) {
@@ -633,6 +677,10 @@
             document.querySelector('.total-pengeluaran').innerText = formatRupiah(data.total_pengeluaran || '0');
             document.querySelector('.total-penjualan-km').innerText = data.totalpenjualkm || '0';
             document.querySelector('.total-penjualan-dm').innerText = data.totalpenjualdm || '0';
+
+            document.querySelector('.td-penjualan-km-kg').innerText = data.kg_kambing || '0';
+            document.querySelector('.td-penjualan-dm-kg').innerText = data.kg_domba || '0';
+
             document.querySelector('.transaksi-km').innerText = formatRupiah(data.transaksikm || '0');
             document.querySelector('.transaksi-dm').innerText = formatRupiah(data.transaksidm || '0');
             document.querySelector('.transaksi-all').innerText = formatRupiah(data.transaksiall || '0');
@@ -645,6 +693,8 @@
             document.querySelector('.td-transaksi-dm').innerText = formatRupiah(data.transaksidm || '0');
             document.querySelector('.td-transaksi-all').innerText = formatRupiah(data.transaksiall || '0');
             document.querySelector('.td-dana-bersih').innerText = formatRupiah(data.dana_bersih || '0');
+            document.querySelector('.penjualan-km-kg').innerText = data.kg_kambing || '0';
+            document.querySelector('.penjualan-dm-kg').innerText = data.kg_domba || '0';
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -1371,8 +1421,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ambil data dari elemen HTML
         const data = [
             
-            ['Total Penjualan Kambing', document.querySelector('.total-penjualan-km')?.innerText || 'N/A'],
-            ['Total Penjualan Domba', document.querySelector('.total-penjualan-dm')?.innerText || 'N/A'],
+            ['Total Penjualan Kambing per-Ekor', document.querySelector('.total-penjualan-km')?.innerText || 'N/A'],
+            ['Total Penjualan Domba per-Ekor', document.querySelector('.total-penjualan-dm')?.innerText || 'N/A'],
+
+            ['Total Penjualan Kambing per-kg', document.querySelector('.td-penjualan-km-kg')?.innerText || 'N/A'],
+            ['Total Penjualan Domba per-kg', document.querySelector('.td-penjualan-dm-kg')?.innerText || 'N/A'],
+
             ['Transaksi Kambing', document.querySelector('.transaksi-km')?.innerText || 'N/A'],
             ['Transaksi Domba', document.querySelector('.transaksi-dm')?.innerText || 'N/A'],
             ['Transaksi All', document.querySelector('.transaksi-all')?.innerText || 'N/A'],
